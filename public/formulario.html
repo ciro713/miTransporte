@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://argob.github.io/poncho/poncho.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/cuerpo.css">
+    <link rel="icon" href="img/logo.ico" />
+    <meta charset="utf-8">
+
+    <style>
+         .navbar-nav .nav-item {
+            display: flex;
+        }
+        .navbar-nav .nav-item .btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            padding: 0;
+            margin-left: 10px; /* Separación entre los botones */
+        }
+
+        @media (max-width: 700px) {
+            .navbar-brand img {
+                width: 30%; /* Ajusta el tamaño del logo para pantallas pequeñas */
+            }
+            .btn.btn-primary.btn-success {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand order-2 mx-auto mx-md-0" href="../index.html">
+                <img class="colect" src="img/image(2).png" style="width: 50%;">
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse order-md-3" id="collapsibleNavbar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-primary btn-success" href="../index.html">
+                            <span class="fa fa-arrow-left"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<style>
+    
+
+
+/* Estilos para el formulario de inicio de sesión y registro */
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f0f3f5; /* Fondo gris claro */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+h3 {
+    text-align: center;
+    color: #3b5998; 
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    color: #3b5998; 
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ced4da; /* Borde gris */
+    border-radius: 5px;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #3b5998; /* Borde azul de Facebook al enfocar */
+}
+
+
+
+.btn-primary {
+    background-color: #3b5998; /* Azul de Facebook */
+    color: #fff; /* Texto blanco */
+}
+
+.btn-primary:hover {
+    background-color: #2d4373; /* Azul más oscuro al pasar el mouse */
+}
+
+.btn-dark {
+    background-color: #000; /* Negro */
+    color: #fff; /* Texto blanco */
+}
+
+.btn-dark:hover {
+    background-color: #333; /* Gris más oscuro al pasar el mouse */
+}
+
+</style>
+    <div class="container mt-5" id="loginForm">
+        <h2>Inicio de Sesión</h2>
+        <form class="form_ingreso">
+            <div class="form-group">
+                <label for="id_usuario">DNI</label>
+                <input type="text" class="form-control" id="id_usuario">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" class="form-control" id="password">
+            </div>
+            <!--El trolo del boton de ingresar no funcionaba porque tomaba por defecto submit entonces recargaba la pagina-->
+            <button type="button" class="btn btn-primary" id="btn-ingresar">Ingresar</button>
+        </form><br>
+
+        <div class="log-in-form-v3__middle flex align-center">
+            <hr>
+            <span class="label-v3 text-battleship-grey"></span>
+            </hr>
+        </div>
+
+        <button class="btn btn-dark btn-block" id="registrarse">Registrarse</button>
+    </div>
+
+    <div class="container mt-5" id="registerForm" style="display: none;">
+        <h2>Registrarse</h2>
+
+        <form class="form_registro" enctype="multipart/form-data"><br><br>
+            <div class="form-group">
+                <label for="nombre_apellido">Nombres y Apellido</label>
+                <input type="text" class="form-control" id="nombre_apellido"> <br>
+
+                <label for="DNI_registro">DNI</label>
+                <input type="number" class="form-control" id="DNI_registro"> <br>
+
+                <label for="password_registro">Contraseña</label>
+                <input type="password" class="form-control" id="password_registro"> <br> <br> <br>
+
+                <label for="establecimiento_educativo"> Establecimiento educativo</label>
+                <select id="establecimiento_educativo">
+                </select>
+
+                <label for="desde"> <br>Desde:</label>
+                <select class="form-control" id="desde">
+                </select> <br>
+
+                <label for="hasta">Hasta:</label>
+                <select class="form-control" id="hasta">
+                </select> <br>
+
+                <label for="direccion">Dirección</label>
+                <input type="text" class="form-control" id="direccion"> <br>
+
+                <label for="email">Email</label>
+                <input type="email" id="email"> <br> <br>
+
+                <label for="img_documento_frente">FOTO DOCUMENTO FRONTAL</label>
+                <input type="file" name="img_documento_frente" id="img_documento_frente"
+                    accept=".png, .jpg, .jpeg"><br><br>
+
+                <label for="img_documento_reverso">FOTO DOCUMENTO REVERSO</label>
+                <input type="file" name="img_documento_reverso" id="img_documento_reverso"
+                    accept=".png, .jpg, .jpeg"><br><br>
+
+                <label for="img_estudiante">FOTO ESTUDIANTE</label>
+                <input type="file" name="img_estudiante" id="img_estudiante" accept=".png, .jpg, .jpeg"><br><br>
+
+                <label for="img_constancia_alumno">FOTO CONSTANCIA DE ALUMNO REGULAR</label>
+                <input type="file" name="img_constancia_alumno" id="img_constancia_alumno" accept=".png, .jpg, .jpeg"><br><br>
+            </div>
+
+            <div class="text-center mt-3">
+                <button type="button" class="btn btn-primary btn-block" id="btn-registrar">Registrarse</button>
+            </div>
+
+            <div class="log-in-form-v3__middle flex align-center">
+                <hr>
+                <span class="label-v3 text-battleship-grey"></span>
+                </hr>
+            </div>
+            <div class="text-center mt-3">
+                <button class="btn btn-dark btn-block" id="showLogin">Volver al Inicio de Sesión</button>
+            </div>
+        </form><br>
+    </div>
+      
+    <!--modal para cambiar contraseña-->
+
+    <div class="container mt-5" id="modal_cambiar_password" style="display: none;">
+        <h2>Inicio de Sesión escuela</h2>
+        <form>
+            <div class="form-group">
+                <label>Escuela:</label>
+                <input type="text"  class="form-control" id="CUE_modal" readonly>
+                <br><br>
+    
+                <label>Nueva Contraseña:</label>
+                <input type="password"  class="form-control" id="password_escuela_cambiar">
+                <br><br>
+
+                <div class="input-token" style="display: none;">
+
+                    <label>Ingrese el codigo enviado al email para verificar su nueva contraseña:</label>
+                    <input type="text" class="form-control"  id="token">
+                    <br><br>
+
+                    <input type="button" value="Enviar Nueva Contraseña" class="btn btn-primary"  id="btn-enviar-token">
+
+                </div>
+
+
+                <input type="button" class="btn btn-primary" value="Cambiar Contraseña" id="btn-cambiar-password">
+            </div>
+        </form>
+    </div>
+    
+    <script src="js/jquery.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/buttons.js"></script>
+    <script src="js/form.js"></script>
+</body>
+
+</html>
