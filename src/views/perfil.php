@@ -283,6 +283,7 @@
                     <img src='".$row['img_estudiante']."' class='foto-perfil' />
                     <h2>".$row['nombre_apellido']."</h2>
                 </section>
+<<<<<<< HEAD
                 <section class='seccion-2'>
                 <p>DNI: ".$dni."</p>
                     <p>Establecimiento Educativo: ".$establecimiento."</p>
@@ -290,6 +291,15 @@
                     <p>Hasta: ".$localidad_hasta."</p>
                     <p>Direccion: ".$row['direccion']."</p>
                 </section>
+=======
+                 </section>
+                            <b><p>DNI:</b> ".$dni."</p></b>
+                            <b><p>Establecimiento Educativo:</b> ".$establecimiento."</p>
+                            <b><p>Viaja Desde:</b> ".$localidad_desde."</p>
+                            <b><p>Hasta:</b> ".$localidad_hasta."</p>
+                           <b> <p>Direccion:</b> ".$row['direccion']."</p>
+                        </section>
+>>>>>>> master
             </main>";
     }
     ?>

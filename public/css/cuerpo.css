@@ -1,7 +1,10 @@
 body {
     background-color: #f8f9fa;
     font-family: Arial, sans-serif;
+<<<<<<< HEAD
     margin: 0;
+=======
+>>>>>>> master
 }
 
 .container {
@@ -83,14 +86,24 @@ form .btn-primary {
     margin: 5px 0;
     font-size: 18px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 .navbar {
     background-color: rgba(1, 24, 126, 0.792);
     height: 90px;
     color: #ffffff;
 }
+<<<<<<< HEAD
 
 .navbar-brand {
     order: 1; /* Coloca el logo al final */
+=======
+/*
+.navbar-brand {
+    order: 1; /* Coloca el logo al final 
+>>>>>>> master
 }
 
 .navbar-brand img {
@@ -100,6 +113,7 @@ form .btn-primary {
 }
 
 .navbar-collapse {
+<<<<<<< HEAD
     order: 2; /* Mueve el contenido del navbar a la izquierda */
 
 }
@@ -111,6 +125,33 @@ form .btn-primary {
     width: 270px;
     height: 270px;
     
+=======
+    order: 2; /* Mueve el contenido del navbar a la izquierda 
+
+}
+.navbar-nav {
+    margin-left: auto; /* Alinea los elementos a la derecha 
+}
+*/
+
+
+
+@media (max-width: 768px) {
+    .btn-success {
+        display: none;
+    }
+    .navbar-brand {
+        margin: 0 auto;
+        display: block;
+        text-align: center;
+    }
+}
+
+.navbar-brand img {
+    width: 45%;
+    height: auto;
+    position: relative;
+>>>>>>> master
 }
 
 

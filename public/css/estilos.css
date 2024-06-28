@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 html, body{
   margin: 0;
   box-sizing: border-box;
@@ -13,6 +14,19 @@ html, body{
 .borrar, .btnNuevo {
   padding: 10px 20px;
   background-color: #e80101;
+=======
+
+.body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0px;
+}
+
+
+.btnBuscar, .btnNuevo, .btnGuardar {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+>>>>>>> master
   border: none;
   color: white;
   cursor: pointer;
@@ -20,6 +34,7 @@ html, body{
   margin-right: 10px;
 }
 
+<<<<<<< HEAD
 .confirmar, .btnNuevo {
 padding: 10px 20px;
 background-color: #3ac703;
@@ -29,6 +44,9 @@ cursor: pointer;
 border-radius: 5px;
 margin-right: 10px;
 }
+=======
+
+>>>>>>> master
 .Buscar, .Buscar2, .Buscar3, .Buscar4 {
   padding: 10px;
   margin-bottom: 10px;
@@ -37,32 +55,50 @@ margin-right: 10px;
   border: 1px solid #ccc;
 }
 
+<<<<<<< HEAD
 
 
 table {
   border: 1px solid #ddd;
   padding: 10px 30px 10px 30px;
+=======
+table {
+>>>>>>> master
   width: 100%;
   border-collapse: collapse;
 }
 
+<<<<<<< HEAD
 th, td {
   text-align: left;
   padding: 10px 30px 10px 30px;
   margin: 10px;
 
+=======
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+>>>>>>> master
 }
 
 th {
   background-color: #f2f2f2;
   color: black;
+<<<<<<< HEAD
   padding: 10px 30px 10px 30px;
   margin: 10px;
 
+=======
+>>>>>>> master
 }
 
 
 .dropdown {
+<<<<<<< HEAD
     position: relative;
     display: inline-block;
   }
@@ -161,3 +197,83 @@ th {
     width: 300px; /* Ajusta el tamaño según tus necesidades */
     height: 300px; /* Ajusta el tamaño según tus necesidades */
 }
+=======
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.show {
+  display: block;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.show {
+  display: block;
+}
+.h1 {
+  text-align: center;
+}
+
+>>>>>>> master
