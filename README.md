@@ -10,11 +10,7 @@
 
 1) git pull origin main 
 
-<<<<<<< HEAD
 # pasos para clonar el repositorio por primera vez
-=======
-# pasos para clonar el repositorio por prigmera vez
->>>>>>> master
 
 1) git clone https://github.com/ciro713/miTransporte.git
 

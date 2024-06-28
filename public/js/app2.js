@@ -1,39 +1,14 @@
 $(function(){
-    $(document).on('click','.borrar',function(){
-        let id=$(this).attr('data_id'); 
-        //console.log($(this)); 
-        $.ajax({
-            url: '../src/controllers/modborrar.php',
-            type: 'POST',
-            data: {
-                id_borrar:id
-            }, success: function (res) {
-               console.log(res);
-                if (res=='1'){
-                   alert('Esta tarea ha sido eliminada');
-                   cargar();
-                   
-                } else {
-                   alert('esta mal');
-                }
-                
-                
-                
-            }
-
+    $('#Buscar').keyup(function(){
+        let Buscar=$('#Buscar').val();
+        $('#tabla').load('../src/models/mod.php',{
+        dato:Buscar
+        },function(){
             
-    });
-})
+        }
+        );
+    });   
 
-$('#Buscar').keyup(function(){
-    let Buscar=$('#Buscar').val();
-    $('#tabla').load('../src/models/mod.php',{
-    dato:Buscar
-    },function(){
-        
-    }
-    );
-});   
     function cargar() {
         $.ajax({
             url: '../src/models/mod3.php',
@@ -56,12 +31,11 @@ $('#Buscar').keyup(function(){
                     }
                 });
                 $('#tabla').html(html_tab);
-                // Añade un evento click a todas las imágenes para expandirlas
+                    // Añade un evento click a todas las imágenes para expandirlas
                 $('.doc-img').on('click', function() {
                     $(this).toggleClass('expanded');
                 });
-            }
-            
+            }       
         });
     }
                                  
@@ -86,4 +60,25 @@ $('#Buscar').keyup(function(){
             }
         });
     });
+
+    $(document).on('click','.borrar',function(){
+        let id=$(this).attr('data_id'); 
+        //console.log($(this)); 
+        $.ajax({
+            url: '../src/controllers/modborrar.php',
+            type: 'POST',
+            data: {
+                id_borrar:id
+            }, success: function (res) {
+               console.log(res);
+                if (res=='1'){
+                   alert('Eliminado correctamente');
+                   cargar();
+                   
+                } else {
+                   alert('error al eliminar');
+                }    
+            }    
+        });
+    })
 });
