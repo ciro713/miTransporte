@@ -1,6 +1,5 @@
 <?php
     include('../config/db-connection.php');
-//include('../db-connection.php');
 
 if(isset($_POST['id_confirmar'])) {
     $estado_credencial = $_POST['id_confirmar'];
