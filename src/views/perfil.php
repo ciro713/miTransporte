@@ -221,7 +221,7 @@
            
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 700px) {
             .credencial {
                 width: 100%;
                 height: auto;
