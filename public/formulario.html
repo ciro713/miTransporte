@@ -221,7 +221,7 @@ label {
 
         <form class="form_registro" enctype="multipart/form-data"><br><br>
             <div class="form-group">
-                <label for="nombre_apellido">Nombres y Apellido</label>
+                <label for="nombre_apellido">Nombre y Apellido</label>
                 <input type="text" class="form-control" id="nombre_apellido"> <br>
 
                 <label for="DNI_registro">DNI</label>
@@ -238,7 +238,7 @@ label {
                 <br> <br> <br>
 
                 <label for="establecimiento_educativo"> Establecimiento educativo</label>
-                <select id="establecimiento_educativo">
+                <select class="form-control" id="establecimiento_educativo"> 
                 </select>
 
                 <label for="desde"> <br>Desde:</label>
@@ -253,21 +253,22 @@ label {
                 <input type="text" class="form-control" id="direccion"> <br>
 
                 <label for="email">Email</label>
-                <input type="email" id="email"> <br> <br>
+                <input type="email" class="form-control" id="email"> <br> <br>
 
                 <label for="img_documento_frente">FOTO DOCUMENTO FRONTAL</label>
-                <input type="file" name="img_documento_frente" id="img_documento_frente"
+                <input type="file" class="form-control" name="img_documento_frente" id="img_documento_frente"
                     accept=".png, .jpg, .jpeg"><br><br>
 
                 <label for="img_documento_reverso">FOTO DOCUMENTO REVERSO</label>
-                <input type="file" name="img_documento_reverso" id="img_documento_reverso"
+                <input type="file"class="form-control" name="img_documento_reverso" id="img_documento_reverso"
                     accept=".png, .jpg, .jpeg"><br><br>
 
                 <label for="img_estudiante">FOTO ESTUDIANTE</label>
-                <input type="file" name="img_estudiante" id="img_estudiante" accept=".png, .jpg, .jpeg"><br><br>
+                <input type="file" class="form-control"name="img_estudiante" id="img_estudiante" accept=".png, .jpg, .jpeg"><br><br>
 
                 <label for="img_constancia_alumno">FOTO CONSTANCIA DE ALUMNO REGULAR</label>
-                <input type="file" name="img_constancia_alumno" id="img_constancia_alumno" accept=".png, .jpg, .jpeg"><br><br>
+                <input type="file" class="form-control" name="img_constancia_alumno" id="img_constancia_alumno" accept=".png, .jpg, .jpeg"><br><br>
+            
             </div>
 
             <div class="text-center mt-3">
