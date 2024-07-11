@@ -1,7 +1,6 @@
 <?php
 
 include('../config/db-connection.php');
-//include('../db-connection.php');
 
 $DNI=$_POST['id_borrar'];
 

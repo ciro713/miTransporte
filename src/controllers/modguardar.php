@@ -1,10 +1,7 @@
 <?php
 
 include('../config/db-connection.php');
-//include('../db-connection.php');
-/* echo $_POST ['postDNI']; */
 
-// echo json_encode($_POST);
 $DNI = $_POST['postDNI'];
 $nombre_apellido = $_POST['postnombre_apellido'];
 $estado_credencial = $_POST['postestado_credencial'];

@@ -21,6 +21,7 @@
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #95f8ff, #5A89E8);
             padding:20px;
+            overflow: hidden;
         }
 
         .credencial {
@@ -220,7 +221,7 @@
            
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 700px) {
             .credencial {
                 width: 100%;
                 height: auto;
