@@ -1,9 +1,3 @@
-// ANIMACION PARA EL SLIDEBAR
-
-function toggleSidebar() {
-    document.querySelector('.sidebar').classList.toggle('open');
-}
-
 // ANIMACION PARA LOS CONTADORES
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -48,6 +42,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-function toggleSidebar() {
-    document.querySelector('.sidebar').classList.toggle('open');
-}
+document.addEventListener('DOMContentLoaded', () => {
+    const alertasBtn = document.getElementById('alertasBtn');
+    const noticiasBtn = document.getElementById('noticiasBtn');
+    const toggleBtn = document.querySelector('.toggle-btn');
+    const sidebar = document.querySelector('.sidebar');
+    const popup = document.getElementById('popup');
+    const closePopup = document.getElementById('closePopup');
+    const popupTitle = document.getElementById('popupTitle');
+    const alertForm = document.getElementById('alertForm');
+    const newsForm = document.getElementById('newsForm');
+
+    // Función para mostrar la ventana emergente con el formulario correspondiente
+    function showPopup(title, formToShow) {
+        popupTitle.textContent = title;
+        alertForm.style.display = 'none';
+        newsForm.style.display = 'none';
+        formToShow.style.display = 'block';
+        popup.style.display = 'flex';
+
+        // Si el ancho de la ventana es pequeño y se abre una alerta o noticia, se cierra el sidebar
+        if (window.innerWidth <= 800) {
+            sidebar.classList.remove('open');
+        }
+    }
+
+    // Evento click para el botón de Alertas
+    alertasBtn.addEventListener('click', () => {
+        showPopup('Crear Alerta', alertForm);
+    });
+
+    // Evento click para el botón de Noticias
+    noticiasBtn.addEventListener('click', () => {
+        showPopup('Crear Noticia', newsForm);
+    });
+
+    // Evento click para el botón de toggle del sidebar
+    toggleBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('open');
+    });
+
+    // Evento click para cerrar la ventana emergente
+    closePopup.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+
+    // Evento click fuera de la ventana emergente para cerrarla
+    window.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            popup.style.display = 'none';
+        }
+    });
+
+    // Evento click en los enlaces del menú para cerrar el sidebar en dispositivos móviles
+    const navLinks = document.querySelectorAll('.nav a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 800) {
+                sidebar.classList.remove('open');
+            }
+        });
+    });
+});

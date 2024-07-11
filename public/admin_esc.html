@@ -19,8 +19,8 @@
                 <p>[nombre escuela]</p>
             </div>
             <nav class="nav">
-                <a href="#" id="alertasBtn">Alertas</a>
-                <a href="#" id="noticiasBtn">Noticias</a>
+                <!--<a href="#" id="alertasBtn">Alertas</a>
+                <a href="#">Noticias</a>-->
                 <a href="#">Estudiantes</a>
                 <a href="#">Cambiar Contraseña</a>
                 <a href="#">Cerrar Sesion</a>
@@ -32,11 +32,7 @@
                 <div class="balance-circle animate">
                     <h3>Alertas</h3>
                     <p>Ultimas Alertas</p>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p><br>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p><br>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p><br>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p><br>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p><br>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
                 </div>
 
                 <div class="balance-circle animate"> 
@@ -60,38 +56,15 @@
                         </div>
                         <div class="counter">
                             <h4 id="school-credentials">0</h4>
-                            <p>Credenciales Usadas en Cooperativa</p>
+                            <p>Credenciales Usadas en Escuela</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
     </div>
 
-    <!-- Ventana Emergente -->
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <span class="close-btn" id="closePopup">&times;</span>
-            <h2 id="popupTitle">Título</h2>
-            <form id="alertForm" style="display: none;">
-                <label for="alertText">Escriba su alerta:</label>
-                <textarea id="alertText" rows="4" cols="50"></textarea>
-                <br>
-                <button type="submit">Enviar Alerta</button>
-            </form>
-            <form id="newsForm" style="display: none;">
-                <label for="newsTitle">Título de la noticia:</label>
-                <input type="text" id="newsTitle">
-                <br>
-                <label for="newsContent">Contenido de la noticia:</label>
-                <textarea id="newsContent" rows="4" cols="50"></textarea>
-                <br>
-                <button type="submit">Enviar Noticia</button>
-            </form>
-        </div>
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/admin.js"></script>
 </body>
