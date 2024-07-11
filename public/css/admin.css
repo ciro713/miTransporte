@@ -1,0 +1,369 @@
+/* Asegurarse de que html y body ocupen toda la pantalla */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #e0ecfa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Asegura que el body ocupa todo el alto */
+    width: 100%;  /* Asegura que el body ocupa todo el ancho */
+}
+
+.container {
+    display: flex;
+    width: 100%;   /* Asegura que el contenedor ocupa todo el ancho */
+    height: 100%;  /* Asegura que el contenedor ocupa todo el alto */
+    background-color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #6aa9e9;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    border: none; /* Añadido para eliminar cualquier borde */
+    flex-shrink: 0; /* Evita que el sidebar se encoja */
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile-img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+}
+
+.nav a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 12px;
+    margin: 10px 0;
+    background-color: #318ce7;
+    transition: background-color 0.3s ease;
+}
+
+.nav a:hover {
+    background-color: #00251a;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    background-color: #e0f7fa;
+    animation: fadeIn 1s ease-in-out;
+}
+
+
+/* ALERTAS Y USUARIOS */
+
+.balance-section,
+.payment-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.balance-circle {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    animation: slideInUp 1s ease-in-out;
+    position: relative;
+    padding: 20px; 
+}
+
+.balance-circle h3 {
+    font-size: 2em;
+    margin: 0;
+    color: #00796b;
+}
+
+.balance-circle p {
+    margin: 10px 0;
+    color: #00796b;
+}
+
+.balance-circle canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+.balance-circle canvas {
+    max-width: 100%;
+    width: 300px; /* Tamaño fijo inicial */
+    height: auto;
+    margin: 0 auto; /* Centrar el canvas */
+}
+
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.legend span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    border-radius: 50%;
+}
+
+.deleted {
+    background-color: #ff5252;
+}
+
+.to-confirm {
+    background-color: #ffca28;
+}
+
+.confirmed {
+    background-color: #66bb6a;
+}
+
+@media (max-width: 600px) {
+    .balance-circle canvas {
+        width: 200px; /* Tamaño más pequeño en pantallas pequeñas */
+    }
+}
+
+.bar-chart {
+    width: 50%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    animation: slideInUp 1.2s ease-in-out;
+}
+
+
+
+
+/* ANIMACION DE LOS CONTADORES*/
+
+.payment-due .counters {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.payment-due .counter {
+    text-align: center;
+}
+
+.payment-due .counter h4 {
+    font-size: 2em;
+    color: #00796b;
+    margin: 0;
+    animation: counterFadeIn 1.5s ease-in-out;
+}
+
+@keyframes counterFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.payment-due {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    animation: slideInUp 1.4s ease-in-out;
+}
+
+.payment-due h3 {
+    margin: 0;
+    color: #00796b;
+}
+
+.payment-due p {
+    margin: 10px 0;
+    font-size: 1.5em;
+    color: #00796b;
+}
+
+/* BOTONES DEL NAV*/
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #00796b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #004d40;
+}
+
+/*
+
+.services {
+    width: 65%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.service {
+    width: 30%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    animation: slideInUp 1.6s ease-in-out;
+}
+
+.service h3 {
+    margin: 0;
+    color: #00796b;
+}
+
+.service p {
+    font-size: 1.5em;
+    margin: 10px 0;
+    color: #00796b;
+}
+
+.service a {
+    text-decoration: none;
+    color: #00796b;
+    transition: color 0.3s ease;
+}
+
+.service a:hover {
+    color: #004d40;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+/* responsive del administrador */
+.toggle-btn {
+    display: none;
+}
+
+@media (max-width: 800px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -250px;
+        top: 0;
+        bottom: 0;
+        width: 250px;
+        background-color: #6aa9e9;
+        color: #fff;
+        padding: 20px;
+        box-sizing: border-box;
+        transition: left 0.3s ease;
+        z-index: 1000; /* Asegurar que el sidebar esté encima del contenido */
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .main-content {
+        margin-left: 0;
+        flex-direction: column;
+        padding-left: 20px;
+    }
+
+    .balance-section,
+    .payment-section {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .balance-circle {
+        width: 100%;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        animation: slideInUp 1s ease-in-out;
+    }
+}
+
+/* Añadir la clase para el botón toggle */
+@media (max-width: 800px) {
+    .toggle-btn {
+        display: block;
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background-color: #6aa9e9;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        z-index: 1001; /* Asegurar que el botón esté encima del sidebar */
+    }
+}
