@@ -62,6 +62,7 @@ switch($opcion){
                 }else{
                     $acceso['escuela'] = true;
                     $_SESSION['id_usuario'] = $id_usuario;
+                    $_SESSION['rol'] = "escuela";
                     // La contraseña es válida
                 }
 
@@ -70,13 +71,13 @@ switch($opcion){
                 $acceso = array('escuelafallido' => true, 'mensaje' => 'password incorrecto');
             }
         } else if($datos_cooperativa = $sql_cooperativa->fetch_object()){
-
-            $_SESSION['id_usuario'] = $id_usuario;
             
             $hash_guardado = $datos_cooperativa->password;
     
             if (password_verify($password, $hash_guardado)) {
                 $acceso['cooperativa'] = true;
+                $_SESSION['id_usuario'] = $id_usuario;
+                $_SESSION['rol'] = "cooperativa";
                 // La contraseña es válida
             }
         }

@@ -67,7 +67,7 @@ $(function(){
                     window.location.href = '../public/espera.html';
                 }else if(data.escuela == true){
                     console.log("Acceso como establecimiento educativo. Redirigiendo...");
-                    window.location.href = '../public/escuela_habilitador.html';
+                    window.location.href = '../public/admin_esc.html';
                 }else if(data.escuelafallido == true){
                     console.log("error al ingresar la escuela");
                 }else if(data.cambiar == true){
@@ -144,7 +144,7 @@ $(function(){
 
                 }else if(data.cooperativa == true){
                     console.log("Acceso como cooperativa. Redirigiendo...");
-                    window.location.href = '../public/cooperativa_habilitador.html';
+                    window.location.href = '../public/admin.html';
                 }else if(data.invalido == true){
                     console.log("Usuario inválido.");
                     alert("Usuario inválido");

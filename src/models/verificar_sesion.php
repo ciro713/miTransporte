@@ -5,7 +5,6 @@
     $logeo = array();
 
     if(isset($_SESSION['id_usuario'])){
-
         $id_usuario = $_SESSION['id_usuario'];
         $sql_estado = $conexion->prepare("SELECT estado_credencial FROM estudiante WHERE DNI = ?");
         $sql_estado->bind_param("s", $id_usuario);

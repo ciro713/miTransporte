@@ -449,3 +449,7 @@ body {
         z-index: 1001; /* Asegurar que el botón esté encima del sidebar */
     }
 }
+
+.cerrar_sesion{
+    cursor: pointer;
+}
