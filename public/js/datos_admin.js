@@ -1,3 +1,18 @@
+function animateCounter(id, start, end, duration) {
+    const element = document.getElementById(id);
+    const range = end - start;
+    const increment = end > start ? 1 : -1;
+    const stepTime = Math.abs(Math.floor(duration / range));
+    let current = start;
+    const timer = setInterval(() => {
+        current += increment;
+        element.textContent = current;
+        if (current == end) {
+            clearInterval(timer);
+        }
+    }, stepTime);
+}
+
 $(function(){
     $.ajax({
         url: '../src/models/admin.php',
@@ -7,27 +22,26 @@ $(function(){
                 const escuela = `${res.establecimiento_educativo}`;
                 const alumns_habilitados = `${res.habilitados}`;
                 const alumns_habilitados_user = `${res.habilitados_user}`;
+                console.log(`${alumns_habilitados_user}`);
                 const alumns_no_habilitados = `${res.no_habilitados}`;
 
                 $(".name_escuela").html(`${escuela}`);
-
-                function animateCounter(id, start, end, duration) {
-                    const element = document.getElementById(id);
-                    const range = end - start;
-                    const increment = end > start ? 1 : -1;
-                    const stepTime = Math.abs(Math.floor(duration / range));
-                    let current = start;
-                    const timer = setInterval(() => {
-                        current += increment;
-                        element.textContent = current;
-                        if (current == end) {
-                            clearInterval(timer);
-                        }
-                    }, stepTime);
+                
+                if(`${alumns_habilitados}` == 0){
+                    document.getElementById('total-credentials').textContent = 0;
+                    console.log("no hay credenciales");
+                }else{
+                    animateCounter('total-credentials', 0, `${alumns_habilitados}`, 2000); 
+                    console.log("hay credenciales");
                 }
-            
-                animateCounter('total-credentials', 0, `${alumns_habilitados}`, 2000);  // Ejemplo de 1500 credenciales
-                animateCounter('school-credentials', 0, `${alumns_habilitados_user}`, 2000); // Ejemplo de 1200 credenciales usadas
+
+                if(`${alumns_habilitados_user}` == 0){
+                    document.getElementById('school-credentials').textContent = 0;
+                    console.log("no hay credenciales de esta escuela");
+                }else{
+                    animateCounter('school-credentials', 0, `${alumns_habilitados_user}`, 2000);
+                    console.log("hay credenciales de esta escuela");
+                }
             
                 const ctx = document.getElementById('usersChart').getContext('2d');
                 const data = {
@@ -113,7 +127,6 @@ $(function(){
                 });
 
                 //animateCounter('total-credentials', 0, , 2000); 
-                console.log(`${alumns_habilitados}`);
 
             } else {
                 // Muestra un mensaje de error
