@@ -19,15 +19,17 @@ $(function(){
         type: 'GET',
         success: function(res){
             if (res.status === 'success'){
-                const escuela = `${res.establecimiento_educativo}`;
+                const usuario = `${res.usuario}`;
                 const alumns_habilitados = `${res.habilitados}`;
                 const alumns_habilitados_user = `${res.habilitados_user}`;
-                console.log(`${alumns_habilitados_user}`);
                 const alumns_no_habilitados = `${res.no_habilitados}`;
 
-                $(".name_escuela").html(`${escuela}`);
+                $(".name").html(`${usuario}`);
                 
                 if(`${alumns_habilitados}` == 0){
+                    document.getElementById('total-credentials').textContent = 0;
+                    console.log("no hay credenciales");
+                }else if(`${alumns_habilitados}` == 'undefined'){
                     document.getElementById('total-credentials').textContent = 0;
                     console.log("no hay credenciales");
                 }else{
@@ -35,7 +37,10 @@ $(function(){
                     console.log("hay credenciales");
                 }
 
-                if(`${alumns_habilitados_user}` == 0){
+                if(`${alumns_habilitados_user}` == 'undefined'){
+                    document.getElementById('school-credentials').textContent = 0;
+                    console.log("no hay credenciales de esta escuela");
+                }else if(`${alumns_habilitados_user}` == 'undefined'){
                     document.getElementById('school-credentials').textContent = 0;
                     console.log("no hay credenciales de esta escuela");
                 }else{
@@ -47,7 +52,7 @@ $(function(){
                 const data = {
                     labels: [/*'Usuarios Eliminados', */'Usuarios a Confirmar', 'Usuarios Confirmados'],
                     datasets: [{
-                        data: [/*10,*/ `${alumns_no_habilitados}`, `${alumns_habilitados_user}`], // Ejemplos de datos, ajusta según sea necesario
+                        data: [/*10,*/ `${alumns_no_habilitados}`, `${alumns_habilitados_user}`],
                         backgroundColor: [/*'#ff5252'*/, '#ffca28', '#66bb6a']
                     }]
                 };
@@ -125,8 +130,6 @@ $(function(){
                         }
                     });
                 });
-
-                //animateCounter('total-credentials', 0, , 2000); 
 
             } else {
                 // Muestra un mensaje de error

@@ -450,6 +450,6 @@ body {
     }
 }
 
-.cerrar_sesion{
+.cerrar_sesion, #alertasBtn, #noticiasBtn{
     cursor: pointer;
 }
