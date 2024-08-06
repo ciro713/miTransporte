@@ -37,7 +37,7 @@ $(function(){
                     console.log("hay credenciales");
                 }
 
-                if(`${alumns_habilitados_user}` == 'undefined'){
+                if(`${alumns_habilitados_user}` == 0){
                     document.getElementById('school-credentials').textContent = 0;
                     console.log("no hay credenciales de esta escuela");
                 }else if(`${alumns_habilitados_user}` == 'undefined'){
