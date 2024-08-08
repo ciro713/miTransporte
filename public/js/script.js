@@ -226,6 +226,12 @@ $(function(){
                     } else {
                         console.log("Respuesta inesperada del servidor:", response);
                     }
+
+                    if(response.relacion_exito){
+                        console.log("relacion creada");
+                    }else if(response.relacion_fallida){
+                        console.log("relacion fallida");
+                    }
                 } catch (error) {
                     console.error("Error al parsear JSON:", error);
                     alert("Respuesta inesperada del servidor. Ver la consola para más detalles.");

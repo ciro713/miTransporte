@@ -92,13 +92,13 @@ switch($opcion){
     case 'registrarse':
 
         $response = array();
-
+    
         try {
             // Verificar conexión a la base de datos
             if (!$conexion) {
                 throw new Exception('Error en la conexión a la base de datos.');
             }
-
+    
             // Recibir y limpiar datos del formulario
             $nombre_apellido = $conexion->real_escape_string($_POST['nombre_apellido']);
             $password = $conexion->real_escape_string($_POST['password']);
@@ -108,20 +108,20 @@ switch($opcion){
             $hasta = $conexion->real_escape_string($_POST['hasta']);
             $direccion = $conexion->real_escape_string($_POST['direccion']);
             $email = $conexion->real_escape_string($_POST['email']);
-
+    
             // Obtener las cooperativas seleccionadas
             $colectivos = isset($_POST['colectivos']) ? $_POST['colectivos'] : [];
-
+    
             // Verificar duplicados
             $sql_comprobar_duplicado = $conexion->query("SELECT u.usuario, e.DNI FROM usuarios u INNER JOIN estudiante e ON u.usuario = e.DNI WHERE u.usuario = '$DNI'");
-
+    
             if ($datos_duplicado = $sql_comprobar_duplicado->fetch_object()) {
                 $response = array('duplicado' => true);
             } else {
                 $password = password_hash($password, PASSWORD_DEFAULT); // Encriptar la contraseña
-
+    
                 $uploadDir = '../uploads/';
-
+    
                 // Verificar si se cargaron correctamente las imágenes antes de moverlas
                 if (
                     isset($_FILES['img_documento_frente']) && $_FILES['img_documento_frente']['error'] === UPLOAD_ERR_OK &&
@@ -133,7 +133,7 @@ switch($opcion){
                     $imagen2Path = $uploadDir . basename($_FILES['img_documento_reverso']['name']);
                     $imagen3Path = $uploadDir . basename($_FILES['img_estudiante']['name']);
                     $imagen4Path = $uploadDir . basename($_FILES['img_constancia_alumno']['name']);
-
+    
                     if (
                         move_uploaded_file($_FILES['img_documento_frente']['tmp_name'], $imagen1Path) &&
                         move_uploaded_file($_FILES['img_documento_reverso']['tmp_name'], $imagen2Path) &&
@@ -141,11 +141,11 @@ switch($opcion){
                         move_uploaded_file($_FILES['img_constancia_alumno']['tmp_name'], $imagen4Path)
                     ) {
                         // Verificar existencia de usuario
-                        $sql_verificar = $conexion->prepare("SELECT * FROM usuarios WHERE id_usuario = ?");
+                        $sql_verificar = $conexion->prepare("SELECT * FROM usuarios WHERE usuario = ?");
                         $sql_verificar->bind_param('s', $DNI);
                         $sql_verificar->execute();
                         $sql_verificar_result = $sql_verificar->get_result();
-
+    
                         if ($sql_verificar_result->num_rows > 0) {
                             $response = array('fallido' => true, 'mensaje' => 'El usuario ya existe.');
                         } else {
@@ -153,27 +153,41 @@ switch($opcion){
                             $sql_insertar_estudiante = $conexion->prepare("INSERT INTO estudiante (DNI, nombre_apellido, email, direccion, desde, hasta, establecimiento_educativo, img_documento_frente, img_documento_reverso, img_estudiante, img_constancia_alumno, estado_credencial) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'espera_escuela')");
                             $sql_insertar_estudiante->bind_param('sssssssssss', $DNI, $nombre_apellido, $email, $direccion, $desde, $hasta, $establecimiento_educativo, $imagen1Path, $imagen2Path, $imagen3Path, $imagen4Path);
                             $sql_insertar_estudiante->execute();
-
-                            //obtener el id del estudiante
+    
+                            // Obtener el id del estudiante
                             $id_estudiante = $sql_insertar_estudiante->insert_id;
-
+    
                             // Insertar en la tabla usuarios
                             $sql_insertar_usuario = $conexion->prepare("INSERT INTO usuarios (`usuario`, `password`) VALUES (?, ?)");
                             $sql_insertar_usuario->bind_param('ss', $DNI, $password);
                             $sql_insertar_usuario->execute();
+    
+                            // Relaciones estudiante_colectivo
+                            $sql_insertar_relacion_colectivo = $conexion->prepare("INSERT INTO estudiantes_cooperativas (id_estudiante, id_cooperativa, estado) 
+                            SELECT * FROM (SELECT ?, ?, 'espera') AS tmp
+                            WHERE NOT EXISTS (
+                                SELECT id_estudiante FROM estudiantes_cooperativas 
+                                WHERE id_estudiante = ? AND id_cooperativa = ?
+                            ) LIMIT 1
+                            ");
 
-                            //relaciones estudiante_colectivo
-                            $sql_insertar_relacion_colectivo = $conexion->prepare("INSERT INTO estudiantes_cooperativas (id_estudiante, id_cooperativa, estado) VALUES (?, ?, 'espera')");
-
-                            foreach ($colectivos as $cooperativa_id) {
-                                $sql_insertar_relacion_colectivo->bind_param('ii', $id_estudiante, $cooperativa_id);
-                                $sql_insertar_relacion_colectivo->execute();
+                            if (!$sql_insertar_relacion_colectivo) {
+                            throw new Exception('Error al preparar la consulta para estudiantes_cooperativas: ' . $conexion->error);
                             }
 
-                            if ($sql_insertar_estudiante->affected_rows > 0 && $sql_insertar_usuario->affected_rows > 0) {
-                                $response = array('exito' => true);
+                            foreach ($colectivos as $cooperativa_id) {
+                            $sql_insertar_relacion_colectivo->bind_param('iiii', $id_estudiante, $cooperativa_id, $id_estudiante, $cooperativa_id);
+
+                            if (!$sql_insertar_relacion_colectivo->execute()) {
+                                throw new Exception('Error al ejecutar la consulta para estudiantes_cooperativas: ' . $sql_insertar_relacion_colectivo->error);
+                            }
+                            }
+
+                            // Verifica si al menos una fila fue afectada
+                            if ($sql_insertar_relacion_colectivo->affected_rows > 0) {
+                                $response['relacion_exito'] = true;
                             } else {
-                                throw new Exception('Error al insertar en la tabla estudiantes o usuarios.');
+                                $response['relacion_fallido'] = true;
                             }
                         }
                     } else {
@@ -186,7 +200,7 @@ switch($opcion){
         } catch (Exception $e) {
             $response = array('fallido' => true, 'mensaje' => $e->getMessage());
         }
-
+    
         // Enviar respuesta como JSON
         echo json_encode($response);
         exit();

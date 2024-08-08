@@ -8,7 +8,8 @@ $cooperativa_query = $conexion->query("SELECT u.usuario, c.id_cooperativa, c.ema
 $cooperativa_resultado = $cooperativa_query->fetch_assoc();
 $id_cooperativa = $cooperativa_resultado['id_cooperativa'];
 
-$query = "SELECT * FROM estudiante WHERE estado_credencial = 'espera_cooperativa'";
+//$query = "SELECT * FROM estudiante WHERE estado_credencial = 'espera_cooperativa'";
+$query = "SELECT e.* FROM estudiante e INNER JOIN estudiantes_cooperativas ec ON e.id_estudiante = ec.id_estudiante WHERE ec.estado = 'espera' AND ec.id_cooperativa = '$id_cooperativa'";
 $res = mysqli_query($conexion, $query);
 
 $json = array();

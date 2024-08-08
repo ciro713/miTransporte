@@ -77,6 +77,7 @@ $(function(){
                    
                 } else {
                    alert('error al eliminar');
+                   cargar();
                 }    
             }    
         });
