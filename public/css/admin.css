@@ -6,7 +6,7 @@ html, body {
     width: 100%;
 }
 
-body {
+body { 
     font-family: 'Roboto', sans-serif;
     background-color: #e0ecfa;
     display: flex;
@@ -100,9 +100,17 @@ body {
     color: #00796b;
 }
 
+.balance-circle h4{
+    font-size: 1.2em;
+    margin: 0;
+    color: #00796b;
+}
+
 .balance-circle p {
     margin: 10px 0;
     color: #00796b;
+    border-style: solid;
+    border-radius: 6px;
 }
 
 .balance-circle canvas {
@@ -208,6 +216,10 @@ body {
 .payment-due h3 {
     margin: 0;
     color: #00796b;
+    padding: 3px 10px;
+    border: PowderBlue 5px solid;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 20px;
 }
 
 .payment-due p {
@@ -234,6 +246,10 @@ body {
     background-color: #004d40;
 }
 
+.alertas{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-color: black;
+}
 
 /* Estilos de las alertas */
 .popup {
