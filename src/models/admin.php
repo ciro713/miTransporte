@@ -67,8 +67,8 @@
         $alumnos_no_hab = $result_no_hab->num_rows;
 
         //estudiantes habilitados por escuela
-        $sql_datos_habilitados_coop = $conexion->prepare("SELECT * FROM estudiante WHERE estado_credencial != ?");
-        $sql_datos_habilitados_coop->bind_param("s", $estado_no_hab);
+        $sql_datos_habilitados_coop = $conexion->prepare("SELECT * FROM estudiante WHERE estado_credencial = ?");
+        $sql_datos_habilitados_coop->bind_param("s", $estado_hab);
         $sql_datos_habilitados_coop->execute();
         $result_hab_coop = $sql_datos_habilitados_coop->get_result();
         $alumnos_hab_user = $result_hab_coop->num_rows;

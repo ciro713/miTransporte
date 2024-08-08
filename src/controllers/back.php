@@ -109,6 +109,9 @@ switch($opcion){
             $direccion = $conexion->real_escape_string($_POST['direccion']);
             $email = $conexion->real_escape_string($_POST['email']);
 
+            // Obtener las cooperativas seleccionadas
+            $colectivos = isset($_POST['colectivos']) ? $_POST['colectivos'] : [];
+
             // Verificar duplicados
             $sql_comprobar_duplicado = $conexion->query("SELECT u.usuario, e.DNI FROM usuarios u INNER JOIN estudiante e ON u.usuario = e.DNI WHERE u.usuario = '$DNI'");
 
@@ -151,10 +154,21 @@ switch($opcion){
                             $sql_insertar_estudiante->bind_param('sssssssssss', $DNI, $nombre_apellido, $email, $direccion, $desde, $hasta, $establecimiento_educativo, $imagen1Path, $imagen2Path, $imagen3Path, $imagen4Path);
                             $sql_insertar_estudiante->execute();
 
+                            //obtener el id del estudiante
+                            $id_estudiante = $sql_insertar_estudiante->insert_id;
+
                             // Insertar en la tabla usuarios
                             $sql_insertar_usuario = $conexion->prepare("INSERT INTO usuarios (`usuario`, `password`) VALUES (?, ?)");
                             $sql_insertar_usuario->bind_param('ss', $DNI, $password);
                             $sql_insertar_usuario->execute();
+
+                            //relaciones estudiante_colectivo
+                            $sql_insertar_relacion_colectivo = $conexion->prepare("INSERT INTO estudiantes_cooperativas (id_estudiante, id_cooperativa, estado) VALUES (?, ?, 'espera')");
+
+                            foreach ($colectivos as $cooperativa_id) {
+                                $sql_insertar_relacion_colectivo->bind_param('ii', $id_estudiante, $cooperativa_id);
+                                $sql_insertar_relacion_colectivo->execute();
+                            }
 
                             if ($sql_insertar_estudiante->affected_rows > 0 && $sql_insertar_usuario->affected_rows > 0) {
                                 $response = array('exito' => true);

@@ -195,6 +195,10 @@ $(function(){
         estudiante.append('establecimiento_educativo', $("#establecimiento_educativo").val());
         estudiante.append('opcion', 'registrarse');
 
+        $("input[name='colectivos[]']:checked").each(function() {
+            estudiante.append('colectivos[]', $(this).val());
+        });
+
         estudiante.forEach((value, key) => {
             console.log(key, value);
         });
