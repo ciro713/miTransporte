@@ -53,7 +53,7 @@ $(function(){
                     labels: [/*'Usuarios Eliminados', */'Usuarios a Confirmar', 'Usuarios Confirmados'],
                     datasets: [{
                         data: [/*10,*/ `${alumns_no_habilitados}`, `${alumns_habilitados_user}`],
-                        backgroundColor: [/*'#ff5252'*/, '#ffca28', '#66bb6a']
+                        backgroundColor: ['#4087ff', '#040fd9']
                     }]
                 };
             
