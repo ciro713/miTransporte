@@ -12,12 +12,13 @@
 
     <div class="container">
         <div class="sidebar">
-
             <div class="profile">
                 <img src="../public/img/usuario.png" alt="Profile" class="profile-img">
                 <h2 class="name"></h2>
             </div>
             <nav class="nav">
+                <a id="alertasBtn" style="display: none;">Alertas</a>
+                <a id="noticiasBtn" style="display: none;">Noticias</a>
                 <a href="escuela_habilitador.html">Estudiantes</a>
                 <a href="#">Cambiar Contraseña</a>
                 <a class="cerrar_sesion">Cerrar Sesion</a>
@@ -53,8 +54,8 @@
                         </div>
                         <div class="counter">
                             <h4 id="school-credentials">0</h4>
-                            <p>Credenciales Usadas en Escuela</p>
-                        </div>
+                            <p>Credenciales Usadas en Escuela
+                        </p>
                     </div>
                 </div>
             </div>
@@ -62,9 +63,10 @@
         <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
     </div>
 
+        
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/admin.js"></script>
     <script src="js/jquery.js"></script>
+    <script src="js/datos_admin.js"></script>
     <script>
         $(".cerrar_sesion").click(function(){
         $.ajax({
@@ -80,8 +82,7 @@
             }
         });
     }); 
-    </script>
 
-    <script src="js/datos_admin.js"></script>
+    </script>
 </body>
 </html>
