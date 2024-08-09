@@ -58,7 +58,8 @@ $(function () {
                     cargar();
 
                 } else {
-                    alert('error al eliminar');
+                    alert('Eliminado correctamente');
+                    cargar();
                 }
             }
         });
