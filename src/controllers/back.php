@@ -163,20 +163,14 @@ switch($opcion){
                             $sql_insertar_usuario->execute();
     
                             // Relaciones estudiante_colectivo
-                            $sql_insertar_relacion_colectivo = $conexion->prepare("INSERT INTO estudiantes_cooperativas (id_estudiante, id_cooperativa, estado) 
-                            SELECT * FROM (SELECT ?, ?, 'espera') AS tmp
-                            WHERE NOT EXISTS (
-                                SELECT id_estudiante FROM estudiantes_cooperativas 
-                                WHERE id_estudiante = ? AND id_cooperativa = ?
-                            ) LIMIT 1
-                            ");
+                            $sql_insertar_relacion_colectivo = $conexion->prepare("INSERT INTO estudiantes_cooperativas (id_estudiante, id_cooperativa, estado) VALUES (?,?,'espera')");
 
                             if (!$sql_insertar_relacion_colectivo) {
                             throw new Exception('Error al preparar la consulta para estudiantes_cooperativas: ' . $conexion->error);
                             }
 
                             foreach ($colectivos as $cooperativa_id) {
-                            $sql_insertar_relacion_colectivo->bind_param('iiii', $id_estudiante, $cooperativa_id, $id_estudiante, $cooperativa_id);
+                            $sql_insertar_relacion_colectivo->bind_param('ii', $id_estudiante, $cooperativa_id);
 
                             if (!$sql_insertar_relacion_colectivo->execute()) {
                                 throw new Exception('Error al ejecutar la consulta para estudiantes_cooperativas: ' . $sql_insertar_relacion_colectivo->error);

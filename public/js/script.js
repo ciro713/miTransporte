@@ -204,9 +204,9 @@ $(function(){
         });
 
         $.ajax({
-            url : '../src/controllers/back.php',
-            type : 'POST',
-            data : estudiante,
+            url: '../src/controllers/back.php',
+            type: 'POST',
+            data: estudiante,
             processData: false,
             contentType: false,
             success: function(data) {
@@ -214,7 +214,7 @@ $(function(){
         
                 try {
                     // Si la respuesta no es ya un objeto JSON, descomentar la línea siguiente:
-                    response = JSON.parse(data);
+                    const response = JSON.parse(data);
         
                     if (response.exito) {
                         window.location.href = '../public/espera.html';
@@ -226,22 +226,24 @@ $(function(){
                     } else {
                         console.log("Respuesta inesperada del servidor:", response);
                     }
-
-                    if(response.relacion_exito){
-                        console.log("relacion creada");
-                    }else if(response.relacion_fallida){
-                        console.log("relacion fallida");
+        
+                    if (response.relacion_exito) {
+                        console.log("Relación creada");
+                    } else if (response.relacion_fallido) {
+                        console.log("Relación fallida");
                     }
                 } catch (error) {
                     console.error("Error al parsear JSON:", error);
+                    console.error("Respuesta recibida:", data);
                     alert("Respuesta inesperada del servidor. Ver la consola para más detalles.");
                 }
             },
-            error:function(xhr, status, error){
-                console.log("Error en la solicitud:", error);
-                //console.log("Error en la solicitud:", data.mensaje);
-                alert("Ha ocurrido un error al procesar la solicitud");
+            error: function(xhr, status, error) {
+                console.error("Error en la solicitud:", error);
+                console.error("Estado de la solicitud:", status);
+                console.error("Respuesta del servidor:", xhr.responseText);
+                alert("Ha ocurrido un error al procesar la solicitud. Ver la consola para más detalles.");
             }
         });
-    });
+    })
 })
