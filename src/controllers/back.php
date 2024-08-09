@@ -166,23 +166,19 @@ switch($opcion){
                             $sql_insertar_relacion_colectivo = $conexion->prepare("INSERT INTO estudiantes_cooperativas (id_estudiante, id_cooperativa, estado) VALUES (?,?,'espera')");
 
                             if (!$sql_insertar_relacion_colectivo) {
-                            throw new Exception('Error al preparar la consulta para estudiantes_cooperativas: ' . $conexion->error);
+                                throw new Exception('Error al preparar la consulta para estudiantes_cooperativas: ' . $conexion->error);
                             }
 
                             foreach ($colectivos as $cooperativa_id) {
                             $sql_insertar_relacion_colectivo->bind_param('ii', $id_estudiante, $cooperativa_id);
 
-                            if (!$sql_insertar_relacion_colectivo->execute()) {
-                                throw new Exception('Error al ejecutar la consulta para estudiantes_cooperativas: ' . $sql_insertar_relacion_colectivo->error);
-                            }
+                                if (!$sql_insertar_relacion_colectivo->execute()) {
+                                    throw new Exception('Error al ejecutar la consulta para estudiantes_cooperativas: ' . $sql_insertar_relacion_colectivo->error);
+                                }
                             }
 
-                            // Verifica si al menos una fila fue afectada
-                            if ($sql_insertar_relacion_colectivo->affected_rows > 0) {
-                                $response['relacion_exito'] = true;
-                            } else {
-                                $response['relacion_fallido'] = true;
-                            }
+                            $response = array('exito' => true);
+
                         }
                     } else {
                         throw new Exception('Error al subir las imágenes.');
