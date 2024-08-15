@@ -82,4 +82,21 @@ $(function(){
             }
         });
     })
+
+    $(".enviar_alerta").click(function(){
+        var content  = {
+            titulo : $("#newTitle").val(),
+            contenido : $("#newContent").val()
+        }
+
+        $.ajax({
+            url : "../controllers/guardar_notificacion.php",
+            type : "POST",
+            dataType : "json",
+            data : content,
+            success:function(data){
+
+            }
+        })
+    })
 });
