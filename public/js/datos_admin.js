@@ -80,8 +80,8 @@ $(function(){
                 const alertForm = document.getElementById('alertForm');
                 const newsForm = document.getElementById('newsForm');
 
-                // Función para mostrar la ventana emergente con el formulario correspondiente
-                function showPopup(title, formToShow) {
+                 // Función para mostrar la ventana emergente con el formulario correspondiente
+                 function showPopup(title, formToShow) {
                     popupTitle.textContent = title;
                     alertForm.style.display = 'none';
                     newsForm.style.display = 'none';
@@ -90,9 +90,14 @@ $(function(){
 
                     // Si el ancho de la ventana es pequeño y se abre una alerta o noticia, se cierra el sidebar
                     if (window.innerWidth <= 800) {
-                        sidebar.classList.remove('open');
+                        sidebar.classList.add('hidden'); // Ocultar el sidebar
                     }
                 }
+
+                // Evento click para el botón de toggle del sidebar
+                toggleBtn.addEventListener('click', () => {
+                    sidebar.classList.toggle('open');
+                });
 
                 // Evento click para el botón de Alertas
                 alertasBtn.addEventListener('click', () => {
@@ -104,14 +109,12 @@ $(function(){
                     showPopup('Crear Noticia', newsForm);
                 });
 
-                // Evento click para el botón de toggle del sidebar
-                toggleBtn.addEventListener('click', () => {
-                    sidebar.classList.toggle('open');
-                });
-
                 // Evento click para cerrar la ventana emergente
                 closePopup.addEventListener('click', () => {
                     popup.style.display = 'none';
+                    if (window.innerWidth <= 800) {
+                        sidebar.classList.remove('hidden'); // Mostrar el sidebar al cerrar el popup
+                    }
                 });
 
                 // Evento click fuera de la ventana emergente para cerrarla
@@ -130,6 +133,54 @@ $(function(){
                         }
                     });
                 });
+
+
+
+                const inicioContent = document.getElementById('inicioContent');
+                const horariosContent = document.getElementById('horariosContent');
+                const cambiarContrasenaContent = document.getElementById('cambiarContrasenaContent');
+
+
+            // Función para mostrar/ocultar secciones
+                function showSection(sectionToShow) {
+                    // Ocultar todas las secciones con la clase content-section
+                    const sections = document.querySelectorAll('.content-section');
+                    sections.forEach(section => {
+                        section.style.display = 'none';
+                    });
+
+                    // También ocultar las secciones específicas
+                    horariosContent.style.display = 'none';
+                    cambiarContrasenaContent.style.display = 'none';
+
+                    // Mostrar la sección seleccionada
+                    sectionToShow.style.display = 'block';
+                }
+
+                // Botón "Horarios"
+                document.getElementById("horariosBtn").addEventListener("click", function() {
+                    showSection(horariosContent);
+                });
+
+                // Botón "Cambiar Contraseña"
+                document.getElementById("cambiarContrasenaBtn").addEventListener("click", function() {
+                    showSection(cambiarContrasenaContent);
+                });
+
+                // Botón "Inicio" en el sidebar
+                document.getElementById("inicioBtn").addEventListener("click", function() {
+                    // Mostrar nuevamente todas las secciones principales
+                    const sections = document.querySelectorAll('.content-section');
+                    sections.forEach(section => {
+                        section.style.display = 'block';
+                    });
+
+                    // Ocultar los contenidos específicos
+                    horariosContent.style.display = 'none';
+                    cambiarContrasenaContent.style.display = 'none';
+                });
+
+                
 
             } else {
                 // Muestra un mensaje de error

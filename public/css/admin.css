@@ -228,6 +228,226 @@ body {
     color: #00796b;
 }
 
+/* DISEÑO DE TARJETAS */
+
+/* Container for the cards */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center cards horizontally */
+    gap: 20px; /* Space between cards */
+    padding: 20px;
+  }
+  
+  /* Card styles */
+  .modern-card {
+    width: 300px; /* Fixed width for cards */
+    border-radius: 15px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    background-color: #fff;
+    text-align: center;
+    margin: 20px auto; /* Ensure centered when stacked */
+  }
+  
+  /* Hover effect to lift the card */
+  .modern-card:hover {
+    transform: translateY(-10px);
+  }
+  
+  /* Card image styling */
+  .card-image-container {
+    height: 180px;
+    overflow: hidden;
+  }
+  
+  .card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* Image zoom on hover */
+  .modern-card:hover .card-img-top {
+    transform: scale(1.1);
+  }
+  
+  /* Card body styling */
+  .card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Card title */
+  .card-title {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  /* Card text */
+  .card-text {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  /* Button styling */
+  .btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease-in-out;
+    text-transform: uppercase;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    .card-container {
+      justify-content: space-around;
+    }
+  
+    .modern-card {
+      width: 100%; /* Make cards full width on smaller screens */
+      margin: 10px 0;
+    }
+  }
+  
+  
+
+
+
+
+
+/* ESTILOS DE CAMBIAR CONTRASEÑA */  
+  .password-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .password-box {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+    animation: fadeIn 0.7s ease-in-out;
+  }
+  
+  .password-box h2 {
+    font-size: 1.8em;
+    color: #00796b;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  .form-group label {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+  }
+  
+  .input-group input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #00796b;
+    border-radius: 8px;
+    font-size: 1.1em;
+    margin-right: 10px;
+  }
+  
+  .toggle-password img {
+    width: 25px;
+    cursor: pointer;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #004d40;
+    box-shadow: 0 0 5px #004d40;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #00796b;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .btn:hover {
+    background-color: #004d40;
+  }
+  
+  @media (max-width: 768px) {
+    .password-box {
+      padding: 30px;
+    }
+  
+    .password-box h2 {
+      font-size: 1.5em;
+    }
+  
+    .form-group label {
+      font-size: 1em;
+    }
+  
+    .input-group input {
+      font-size: 1em;
+    }
+  
+    .btn {
+      font-size: 1em;
+    }
+  }
+  
+  /* Animaciones */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+
+
+
+
+
 /* BOTONES DEL NAV*/
 
 .btn {

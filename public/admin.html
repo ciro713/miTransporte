@@ -7,6 +7,20 @@
     <link rel="stylesheet" href="css/admin.css">
     <link rel="icon" href="img/logo.ico" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+
+<style>
+    .content-section {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+.content-section.hide {
+    opacity: 0;
+    display: none;
+}
+
+</style>
 </head>
 <body>            
 
@@ -16,17 +30,22 @@
                 <img src="../public/img/usuario.png" alt="Profile" class="profile-img">
                 <h2 class="name"></h2>
             </div>
+
             <nav class="nav">
+                <a id="inicioBtn" style="cursor: pointer;">Inicio</a>
                 <a id="alertasBtn">Alertas</a>
-                <a id="noticiasBtn">Alertas</a>
+                <a id="noticiasBtn">Noticias</a>
                 <a href="cooperativa_habilitador.html">Estudiantes</a>
-                <a href="#">Cambiar Contraseña</a>
+                <a id="horariosBtn" style="cursor: pointer;">Horarios</a>
+                <a id="cambiarContrasenaBtn" style="cursor: pointer;">Cambiar Contraseña</a>
                 <a class="cerrar_sesion">Cerrar Sesion</a>
             </nav>
+            
         </div>
+
         <div class="main-content">
-            <div class="balance-section animate">
-  
+            <div id="inicioContent" class="balance-section animate content-section">
+
                 <div class="balance-circle animate">
                     <h3>Alertas</h3>
                     <p>Ultimas Alertas</p>
@@ -46,29 +65,132 @@
                         <span class="confirmed"></span> Usuarios Confirmados
                     </div>-->
                 </div>
-            </div>
+                </div>
+                
 
-            <div class="payment-section animate">
-                <div class="payment-due animate">
-                    <br>
-                    <div class="counters">
-                        <div class="counter">
-                            <h4 id="total-credentials">0</h4>
-                            <p>Total Credenciales</p>
-                        </div>
-                        <div class="counter">
-                            <h4 id="school-credentials">0</h4>
-                            <p>Credenciales Usadas en Cooperativa
-                                
-                            </p>
+                <div class="payment-section animate  content-section">
+                    <div class="payment-due animate">
+                        <br>
+                        <div class="counters">
+                            <div class="counter">
+                                <h4 id="total-credentials">0</h4>
+                                <p>Total Credenciales</p>
+                            </div>
+                            <div class="counter">
+                                <h4 id="school-credentials">0</h4>
+                                <p>Credenciales Usadas en Cooperativa
+                                    
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+             <div id="horariosContent" style="display: none;">
+                <!-- Contenido para la sección de Horarios -->
+
+                <div class="card-container">
+                    <div class="card modern-card">
+                      <div class="card-image-container">
+                        <img src="https://via.placeholder.com/288x180" class="card-img-top" alt="Image">
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">Why We Use HTML</h5>
+                        <p class="card-text">HTML allows us to create websites that help us to gain deep knowledge in web development. Pellentesque dictum consequat tincidunt.</p>
+                        <input type="file" class="form-control" accept=".png, .jpg, .jpeg, .pdf," style="border-style: solid; color: rgb(55, 65, 85);"><br><br>
+                        <button type="button" class="btn btn-primary">Enviar</button>
+                    </div>
+                    </div>
+                    
+                    <div class="card modern-card">
+                      <div class="card-image-container">
+                        <img src="https://via.placeholder.com/288x180" class="card-img-top" alt="Image">
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title">Why We Use CSS</h5>
+                        <p class="card-text">CSS is used to design websites with responsive and attractive layouts. Quisque at metus felis. Integer condimentum metus.</p>
+                        <input type="file" class="form-control" accept=".png, .jpg, .jpeg, .pdf," style="border-style: solid; color: rgb(55, 65, 85);"><br><br>
+                        <button type="button" class="btn btn-primary">Enviar</button>
+                    </div>
+                    </div>
+                  
+                    <div class="card modern-card">
+                        <div class="card-image-container">
+                          <img src="https://via.placeholder.com/288x180" class="card-img-top" alt="Image">
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title">Why We Use CSS</h5>
+                          <p class="card-text">CSS is used to design websites with responsive and attractive layouts. Quisque at metus felis. Integer condimentum metus.</p>
+                          <input type="file" class="form-control" accept=".png, .jpg, .jpeg, .pdf," style="border-style: solid; color: rgb(55, 65, 85);"><br><br>
+                          <button type="button" class="btn btn-primary">Enviar</button>
+                        </div>
+                      </div>
+
+                      <div class="card modern-card">
+                        <div class="card-image-container">
+                          <img src="https://via.placeholder.com/288x180" class="card-img-top" alt="Image">
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title">Why We Use CSS</h5>
+                          <p class="card-text">CSS is used to design websites with responsive and attractive layouts. Quisque at metus felis. Integer condimentum metus.</p>
+                          <input type="file" class="form-control" accept=".png, .jpg, .jpeg, .pdf," style="border-style: solid; color: rgb(55, 65, 85);"><br><br>
+                          <button type="button" class="btn btn-primary">Enviar</button>
+                        </div>
+                      </div>
+
+                      <div class="card modern-card">
+                        <div class="card-image-container">
+                          <img src="https://via.placeholder.com/288x180" class="card-img-top" alt="Image">
+                        </div>
+                        <div class="card-body">
+                          <h5 class="card-title">Why We Use CSS</h5>
+                          <p class="card-text">CSS is used to design websites with responsive and attractive layouts. Quisque at metus felis. Integer condimentum metus.</p>
+                          <input type="file" class="form-control" accept=".png, .jpg, .jpeg, .pdf," style="border-style: solid; color: rgb(55, 65, 85);"><br><br>
+                          <button type="button" class="btn btn-primary">Enviar</button>
+                        </div>
+                      </div>
+
+                  </div>
+                  
+                  
             </div>
+
+            <div id="cambiarContrasenaContent" style="display: none;">
+                <!-- Contenido para la sección de Cambiar Contraseña -->
+                    <div class="password-container">
+                        <div class="password-box">
+                            <h2>Inicio de Sesión Escuela</h2>
+                            <form>
+                            
+                            <div class="form-group password-field">
+                                <label>Nueva Contraseña:</label>
+                                <div class="input-group">
+                                <input type="password" class="form-control" id="password_escuela_cambiar">
+                                <span class="toggle-password" onclick="togglePasswordVisibility('password_escuela_cambiar')">
+                                    <img id="toggle-icon-password_escuela" src="https://img.icons8.com/ios-glyphs/30/000000/visible.png" alt="Show/Hide Password">
+                                </span>
+                                </div>
+                            </div>
+
+                            <div class="input-token" style="display: none;">
+                                <label>Código de Verificación:</label>
+                                <input type="text" class="form-control" id="token">
+                            </div>
+
+                            <button type="button" class="btn btn-primary" id="btn-cambiar-password">Cambiar Contraseña</button>
+                            <button type="button" class="btn btn-secondary" id="btn-enviar-token" style="display: none;">Enviar Nueva Contraseña</button>
+                            </form>
+                        </div>
+                    </div>
+
+            </div>
+
             <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
         </div>
 
+        
 
+        
        <!-- Ventana Emergente -->
     <div id="popup" class="popup">
         <div class="popup-content">
@@ -81,16 +203,18 @@
                 <button type="submit">Enviar Alerta</button>
             </form>
             <form id="newsForm" style="display: none;">
-                <label for="newsTitle">Título de la notificacion:</label>
+                <label for="newsTitle">Título de la noticia:</label>
                 <input type="text" id="newsTitle">
                 <br>
-                <label for="newsContent">Contenido de la notificacion:</label>
+                <label for="newsContent">Contenido de la noticia:</label>
                 <textarea id="newsContent" rows="4" cols="50"></textarea>
                 <br>
-                <button type="button" id="enviar_alerta">Enviar Notificacion</button>
+                <button type="submit">Enviar Noticia</button>
             </form>
         </div>
     </div>
+
+
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/jquery.js"></script>
