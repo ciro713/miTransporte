@@ -76,7 +76,7 @@
 
 <?php
 
-$conexion = new mysqli("localhost", "root", "", "proyecto_credencial");
+include('../config/db-connection.php');
 
 if ($conexion->connect_error) {
     die("La conexión falló: " . $conexion->connect_error);
