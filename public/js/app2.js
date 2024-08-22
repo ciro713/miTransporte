@@ -23,6 +23,7 @@ $(function(){
                             <td>${dato.DNI}</td>
                             <td>${dato.nombre_apellido}</td>
                             <td><img src="../src/src/${dato.documento_frente}" class="doc-img" /></td>
+                            <td><img src="../src/src/${dato.documento_reverso}" class="doc-img" /></td>
                             <td><img src="../src/src/${dato.constancia}" class="doc-img" /></td>
                             <td><img src="../src/src/${dato.alumno}" class="doc-img" /></td>
                             <td><button type="button" data_id2="${dato.estado_credencial}"  data_id="${dato.DNI}" class="confirmar">Confirmar</button></td>
@@ -43,16 +44,20 @@ $(function(){
 
     $(document).on('click', '.confirmar', function() {
         let DNI = $(this).attr('data_id');
+        console.log('alo')
         $.ajax({
             url: '../src/models/mod4.php', 
             type: 'POST',
             data: { id_confirmar: DNI },
             success: function(res) {
                 console.log(DNI);
+                console.log(res);
+                
                 if (res === '1') {
                     alert('El estado de la credencial ha sido actualizado a "habilitado"');
                    
                     cargar();
+                    
                 } else if(res === '0'){
                     alert('Hubo un error al actualizar el estado de la credencial');
                     console.log("respuesta: ", res);
