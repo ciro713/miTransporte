@@ -59,7 +59,8 @@ if (isset($_POST['id_confirmar'])) {
         );
 
         if($response->ok) {
-            echo json_encode(["ok" => true, "message" => "Oka"]);
+            //echo json_encode(["ok" => true, "message" => "Oka"]);
+            echo '1 ';
             return;
         }
         echo json_encode(["ok" => false, "message" => "Ha ocurrido un error"]);

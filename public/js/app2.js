@@ -44,14 +44,11 @@ $(function(){
 
     $(document).on('click', '.confirmar', function() {
         let DNI = $(this).attr('data_id');
-        console.log('alo')
         $.ajax({
             url: '../src/models/mod4.php', 
             type: 'POST',
             data: { id_confirmar: DNI },
             success: function(res) {
-                console.log(DNI);
-                console.log(res);
                 
                 if (res === '1') {
                     alert('El estado de la credencial ha sido actualizado a "habilitado"');
