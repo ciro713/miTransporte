@@ -337,8 +337,13 @@
 <button class="cerrar_sesion">Cerrar Sesion</button></div>
 </section>
 
+<section>
+
+</section>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.3.2/dist/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="../../public/js/jquery.js"></script>
 <script src="../../public/js/buttons.js"></script>
 
