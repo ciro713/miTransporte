@@ -337,7 +337,7 @@
 <button class="cerrar_sesion">Cerrar Sesion</button></div>
 </section>
 
-<section>
+<section id="qrcode">
 
 </section>
 
@@ -346,6 +346,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="../../public/js/jquery.js"></script>
 <script src="../../public/js/buttons.js"></script>
+<script src="../../public/js/generador_qr.js"></script>
 
 </body>
 </html>
