@@ -33,11 +33,19 @@ if (isset($_POST['id_confirmar'])) {
         $stmt_update_student->bind_param('s', $DNI);
         $stmt_update_student->execute();
 
+        //busca el email del alumno a donde enviar el mail de confirmacion
+        $sql_email_alumno = $conexion->prepare("SELECT email FROM estudiante WHERE DNI = ?");
+        $sql_email_alumno->bind_param('s',$DNI);
+        $sql_email_alumno->execute();
+
+        $result_sql_email_alumno = $sql_email_alumno->fetch_assoc();
+
+
         include("./email.php");
         $response = enviarCorreo(
             "facundoaragon05@hotmail.com",
             "miTransporte",
-            "anachuchu309@gmail.com",
+            $result_sql_email_alumno,
             "Su credencial ha sido habilitada",
         
             "
