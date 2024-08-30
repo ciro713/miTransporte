@@ -27,66 +27,58 @@ if (isset($_POST['id_confirmar'])) {
     $row = $result_check_all_habilitated->fetch_assoc();
 
     if ($row['count'] == 0) {
-       // Si todas las cooperativas están habilitadas, actualizar el estado_credencial
+        // Si todas las cooperativas están habilitadas, actualizar el estado_credencial
         $update_student_query = "UPDATE estudiante SET estado_credencial = 'habilitado' WHERE DNI = ?";
         $stmt_update_student = $conexion->prepare($update_student_query);
         $stmt_update_student->bind_param('s', $DNI);
         $stmt_update_student->execute();
 
-        //busca el email del alumno a donde enviar el mail de confirmacion
+        // Busca el email del alumno para enviar el mail de confirmación
         $sql_email_alumno = $conexion->prepare("SELECT email FROM estudiante WHERE DNI = ?");
-        $sql_email_alumno->bind_param('s',$DNI);
+        $sql_email_alumno->bind_param('s', $DNI);
         $sql_email_alumno->execute();
-
-        $result_sql_email_alumno = $sql_email_alumno->fetch_assoc();
-
+        
+        $result_sql_email_alumno = $sql_email_alumno->get_result();
+        $result_sql_email_alumno = $result_sql_email_alumno->fetch_assoc();
 
         include("./email.php");
         $response = enviarCorreo(
             "facundoaragon05@hotmail.com",
             "miTransporte",
-            $result_sql_email_alumno,
+            $result_sql_email_alumno['email'],
             "Su credencial ha sido habilitada",
-        
             "
-        
             <h1 style='text-align: center;'>miTransporte</h1>
             <img src='https://www.tecnica1lacosta.edu.ar/mitransporte/public/img/logo.png' alt='Logo' />
             <h3 style='text-align: center;'>Su credencial ha sido habilitada, ya está apto para poder iniciar sesión y utilizar su credencial</h3>
             <h4 style='text-align: center;'>¡Gracias por su espera!</h4>
-            <h4 style='text-align: center;'>¡Visita nuestra pagina web!</h4>
+            <h4 style='text-align: center;'>¡Visita nuestra página web!</h4>
             <center>
-            <a href='https://www.tecnica1lacosta.edu.ar/mitransporte/' style='background-color: #007bff; color: white; padding: 10px 20px; 
-                text-decoration: none; display: inline-block; border-radius: 5px; align-items: center'>Ingresar</a>
+            <a href='https://www.tecnica1lacosta.edu.ar/mitransporte/' style='background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; display: inline-block; border-radius: 5px; align-items: center'>Ingresar</a>
             </center>
             <footer style='text-align: center; font-size: 12px; color: #777;'>
                 <p>© 2024 miTransporte. Todos los derechos reservados.</p>
             </footer>
-            
             "
         );
 
-        if($response->ok) {
-            //echo json_encode(["ok" => true, "message" => "Oka"]);
-            echo '1 ';
+        if ($response->ok) {
+            echo json_encode(["habilitado" => true, "message" => "El estado de la credencial ha sido actualizado y se ha enviado un correo electrónico."]);
+            return;
+        } else {
+            echo json_encode(["ok" => false, "message" => "El estado de la credencial ha sido actualizado, pero no se pudo enviar el correo electrónico."]);
             return;
         }
-        echo json_encode(["ok" => false, "message" => "Ha ocurrido un error"]);
-        return;
-
-        include("ejemploCorreo.php");
     }
 
-    // Verificar si la operación fue exitosa
+    // Verificar si la operación de actualización fue exitosa
     if ($stmt_update_relation->affected_rows > 0) {
-        echo '1';
+        echo json_encode(["ok" => true, "message" => "El estado de la cooperativa ha sido actualizado, pero no se ha habilitado la credencial."]);
     } else {
-        echo '0';
+        echo json_encode(["ok" => false, "message" => "No se pudo actualizar el estado de la cooperativa."]);
     }
-
-
-    
 } else {
-    echo 'No se recibió ningún ID';
+    echo json_encode(["ok" => false, "message" => "No se recibió ningún ID"]);
 }
+
 ?>
