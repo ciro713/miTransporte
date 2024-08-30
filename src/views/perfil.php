@@ -249,6 +249,7 @@
 
     $sql = "SELECT * FROM estudiante WHERE DNI='$id_usuario'";
     $result = mysqli_query($conexion, $sql);
+
     ?>
 
     <table id="customers">
