@@ -180,4 +180,8 @@
 <script src="../../public/js/generador_qr.js"></script>
 
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> c302d47acf7054722bd213eb6161e622b5199b3a

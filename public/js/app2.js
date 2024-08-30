@@ -49,16 +49,16 @@ $(function(){
             type: 'POST',
             data: { id_confirmar: DNI },
             success: function(res) {
-                
-                if (res === '1') {
+                let datos = JSON.parse(res);   
+                console.log(datos);
+                if (datos.habilitado) {
                     alert('El estado de la credencial ha sido actualizado a "habilitado"');
-                   
                     cargar();
-                    
-                } else if(res === '0'){
-                    alert('Hubo un error al actualizar el estado de la credencial');
-                    console.log("respuesta: ", res);
+                } else {
+                    alert(datos.message || 'Hubo un error al actualizar el estado de la credencial');
+                    console.log("respuesta: ", datos);
                 }
+                
             }
         });
     });
