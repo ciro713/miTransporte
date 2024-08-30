@@ -111,7 +111,10 @@
             <!-- Botones de descarga -->
             <section class="top-buttons buttons">
             <div class="container">
-                <button id="descargarPngBtn" class="button">Descargar PNG</button><br><br>
+                <button id="descargarBtn" class="button"> Descargar <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+                    <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path></svg>
+                </button>
+                    
                 <button id="descargarPdfBtn" class="button">Descargar PDF</button><br><br>
                 <button class="cerrar_sesion">Cerrar Sesion</button></div>
                 </div>
@@ -179,9 +182,22 @@
 <script src="../../public/js/buttons.js"></script>
 <script src="../../public/js/generador_qr.js"></script>
 
+
+
+<script>
+    function checkOrientation() {
+        if (window.innerHeight > window.innerWidth) {
+            alert("Para una mejor experiencia, por favor, gira tu dispositivo a modo horizontal.");
+        }
+    }
+
+    // Check orientation on load
+    window.onload = checkOrientation;
+
+    // Check orientation on resize
+    window.onresize = checkOrientation;
+</script>
+
+
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> c302d47acf7054722bd213eb6161e622b5199b3a

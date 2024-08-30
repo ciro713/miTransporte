@@ -25,7 +25,7 @@ function generarQR(urlPerfil) {
     // Crear un nuevo QR
     new QRCode(document.getElementById("qrcode"), {
         text: urlPerfil, // URL a la que redirigirá el QR
-        width: 128, // Ancho del QR
-        height: 128 // Altura del QR
+        width: 110, // Ancho del QR
+        height: 110 // Altura del QR
     });
 }
