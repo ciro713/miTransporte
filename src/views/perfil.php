@@ -99,8 +99,7 @@
                                 </style>
                                 <img style="width: 64px; height: 63px; border-radius: 50%;" src="../../public/img/eest1.png"  alt="">
                             
-                            </div><br>
-                            
+                            </div><br> 
                         </th>
                     </tr>
                 </table><br>

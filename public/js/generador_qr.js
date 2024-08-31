@@ -20,7 +20,7 @@ $(function(){
 
 function generarQR(urlPerfil) {
     // Vaciar el contenedor si ya existe un QR
-    document.getElementById('qrcode').innerHTML = "";
+    //document.getElementById('qrcode').innerHTML = "";
 
     // Crear un nuevo QR
     new QRCode(document.getElementById("qrcode"), {
@@ -37,7 +37,7 @@ function generarQR(urlPerfil) {
 
 function agregarLogoAlQR() {
     const qrcodeElement = document.querySelector('#qrcode img');
-    const logoSrc = '../../public/img/logoqr.png'; // Reemplaza con la ruta al logo que quieras agregar
+    const logoSrc = '../../public/img/pngwing.com (13).png'; // Reemplaza con la ruta al logo que quieras agregar
 
     if (!qrcodeElement) return;
 
@@ -66,9 +66,11 @@ function agregarLogoAlQR() {
 
         // Reemplazar el código QR original con el nuevo que incluye el logo
         const qrWithLogo = document.getElementById('qrcode');
+        const qrWithLogo2 = document.getElementById('qrcode2');
         qrWithLogo.innerHTML = ''; // Limpiar el contenedor anterior
         const img = document.createElement('img');
         img.src = canvas.toDataURL();
         qrWithLogo.appendChild(img);
+        qrWithLogo2.appendChild(img);
     };
 }
