@@ -190,6 +190,12 @@ body {
     border-radius: 50%;
 }
 
+#contenedor-qr{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* BOTON DE DESCARGA */
 
 .button {

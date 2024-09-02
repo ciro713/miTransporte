@@ -4,13 +4,13 @@ $(function(){
         type: 'GET',
         success: function(res){
             var id_usuario = res.trim(); // Asegúrate de quitar espacios en blanco
-            //console.log(id_usuario);
 
             // Construir la URL con el id_usuario
             var urlPerfilAlumno = "http://localhost/miTransporte/src/views/perfil.php?id_usuario=" + id_usuario;
 
-            // Llamar a la función para generar el código QR
-            generarQR(urlPerfilAlumno);
+            // Llamar a las funciones para generar los códigos QR en los dos contenedores
+            generarQR('#qrcode', urlPerfilAlumno, 110, 110); // QR pequeño
+            generarQR('#qrcode2', urlPerfilAlumno, 400, 400); // QR grande
         },
         error: function(err){
             console.error("Error al obtener el id_usuario:", err);
@@ -18,25 +18,22 @@ $(function(){
     });
 });
 
-function generarQR(urlPerfil) {
-    // Vaciar el contenedor si ya existe un QR
-    //document.getElementById('qrcode').innerHTML = "";
-
+function generarQR(elementId, urlPerfil, width, height) {
     // Crear un nuevo QR
-    new QRCode(document.getElementById("qrcode"), {
+    new QRCode(document.querySelector(elementId), {
         text: urlPerfil, // URL a la que redirigirá el QR
-        width: 110, // Ancho del QR
-        height: 110 // Altura del QR
+        width: width, // Ancho del QR
+        height: height // Altura del QR
     });
 
-        // Esperar un momento para que el QR se genere completamente antes de agregar el logo
-        setTimeout(() => {
-            agregarLogoAlQR();
-        }, 500);
+    // Esperar un momento para que el QR se genere completamente antes de agregar el logo
+    setTimeout(() => {
+        agregarLogoAlQR(elementId);
+    }, 500);
 }
 
-function agregarLogoAlQR() {
-    const qrcodeElement = document.querySelector('#qrcode img');
+function agregarLogoAlQR(elementId) {
+    const qrcodeElement = document.querySelector(elementId + ' img');
     const logoSrc = '../../public/img/pngwing.com (13).png'; // Reemplaza con la ruta al logo que quieras agregar
 
     if (!qrcodeElement) return;
@@ -65,12 +62,10 @@ function agregarLogoAlQR() {
         context.drawImage(logo, logoX, logoY, logoSize, logoSize);
 
         // Reemplazar el código QR original con el nuevo que incluye el logo
-        const qrWithLogo = document.getElementById('qrcode');
-        const qrWithLogo2 = document.getElementById('qrcode2');
+        const qrWithLogo = document.querySelector(elementId);
         qrWithLogo.innerHTML = ''; // Limpiar el contenedor anterior
         const img = document.createElement('img');
         img.src = canvas.toDataURL();
         qrWithLogo.appendChild(img);
-        qrWithLogo2.appendChild(img);
     };
 }
