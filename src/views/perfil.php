@@ -19,7 +19,13 @@
             <div class="carousel-item">
                 <div class="credencial" id="credencial">
                 <?php
-                $id_usuario = $_SESSION['id_usuario'];
+
+                if(isset($_SESSION['id_usuario'])){
+                    $id_usuario = $_SESSION['id_usuario'];
+                }else if(isset($_GET['id_usuario'])){
+                    $id_usuario = $_GET['id_usuario'];
+                }
+                
 
                 $sql = "SELECT * FROM estudiante WHERE DNI='$id_usuario'";
                 $result = mysqli_query($conexion, $sql);
