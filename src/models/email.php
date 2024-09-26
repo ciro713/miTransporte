@@ -1,14 +1,14 @@
 <?php
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require 'PHPMailer/Exception.php';
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
+
 function enviarCorreo($from, $name, $address, $subject, $body) {
     $mail = new PHPMailer(true);
-    $respuesta = new stdclass;
+    $respuesta = new stdClass;
 
     try {
         // Configuración del servidor
@@ -19,27 +19,30 @@ function enviarCorreo($from, $name, $address, $subject, $body) {
         $mail->Password = 'cadufacu7';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
-    
-        // Destinatarios from= remitente, 
+
+        // Activar modo de depuración
+        $mail->SMTPDebug = 2; // Nivel de depuración
+        $mail->Debugoutput = 'html';
+
+        // Destinatarios
         $mail->setFrom($from, $name);
         $mail->addAddress($address);
-    
+
         // Contenido del correo
         $mail->isHTML(true);
         $mail->Subject = $subject;
         $mail->Body = $body;
-    
+
+        // Enviar correo
         $mail->send();
-        // echo 'El mensaje ha sido enviado';
         $respuesta->ok = true;
         return $respuesta;
     } catch (Exception $e) {
         $respuesta->ok = false;
         $respuesta->mensaje = "El mensaje no pudo ser enviado. Error de Mailer: {$mail->ErrorInfo}";
+        echo "Mailer Error: " . $mail->ErrorInfo; // Para depuración
         return $respuesta;
     }
-
-} 
-
-
+}
+ 
 ?>

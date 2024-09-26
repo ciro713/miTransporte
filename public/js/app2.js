@@ -49,19 +49,25 @@ $(function(){
             type: 'POST',
             data: { id_confirmar: DNI },
             success: function(res) {
-                let datos = JSON.parse(res);   
-                console.log(datos);
-                if (datos.habilitado) {
-                    alert('El estado de la credencial ha sido actualizado a "habilitado"');
-                    cargar();
-                } else {
-                    alert(datos.message || 'Hubo un error al actualizar el estado de la credencial');
-                    console.log("respuesta: ", datos);
+                console.log('Respuesta cruda:', res);  // Imprime la respuesta tal cual se recibe
+                try {
+                    let datos = JSON.parse(res);   
+                    console.log('JSON parseado:', datos);  // Imprime el JSON parseado
+                    if (datos.habilitado) {
+                        alert('El estado de la credencial ha sido actualizado a "habilitado"');
+                        cargar();
+                    } else {
+                        alert(datos.message || 'Hubo un error al actualizar el estado de la credencial');
+                        console.log("respuesta: ", datos);
+                    }
+                } catch (e) {
+                    console.error('Error al parsear JSON:', e);
+                    alert('Ocurrió un error al procesar la respuesta del servidor.');
                 }
-                
             }
         });
     });
+    
 
     $(document).on('click','.borrar',function(){
         let id=$(this).attr('data_id'); 

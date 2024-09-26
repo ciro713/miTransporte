@@ -90,3 +90,8 @@
         margin-bottom: 10px;
     }
 }
+
+.recover-pass{
+    text-decoration: none;
+    color: rgb(0, 110, 255);
+}
