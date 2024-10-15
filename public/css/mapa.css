@@ -1,0 +1,72 @@
+
+@media (max-width: 768px) {
+    .btn-success {
+        display: none;
+    }
+
+    .navbar {
+        background-color: rgba(1, 24, 126, 0.792);
+        height: 90px;
+        color: #ffffff;
+    }
+
+        .navbar-brand {
+            
+            margin: 0 auto;
+            display: block;
+            text-align: center;
+        }
+    }
+
+    .navbar-brand img {
+        width: 45%;
+        height: auto;
+        position: relative;
+    }
+#map {
+    height: 400px;
+    width: 100%;
+}
+
+.status {
+        display: none;
+        /* Oculta el div */
+    }
+
+button {
+    background-color: #343a40;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, transform 0.3s;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #495057;
+    transform: scale(1.05);
+}
+
+button:disabled {
+    background-color: #adb5bd;
+    cursor: not-allowed;
+}
+
+
+@media (max-width: 600px) {
+    button {
+        font-size: 14px;
+    }
+
+    input {
+        font-size: 14px;
+    }
+    
+   
+
+}

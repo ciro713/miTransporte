@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recorrido</title>  
+    <link rel="stylesheet" href="https://argob.github.io/poncho/poncho.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/cuerpo.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/logo.ico" />
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+           
+            color: #343a40;
+        }
+
+
+        @media (max-width: 768px) {
+            .btn-success {
+                display: none;
+            }
+
+            .navbar {
+                background-color: rgba(1, 24, 126, 0.792);
+                height: 90px;
+                color: #ffffff;
+            }
+
+                .navbar-brand {
+                    margin: 0 auto;
+                    display: block;
+                    text-align: center;
+                }
+            }
+
+            .navbar-brand img {
+                width: 45%;
+                height: auto;
+                position: relative;
+            }
+
+            #map {
+                flex: 1;
+                width: 100%;
+                height: 100%;
+            }
+
+            .status {
+                display: none;
+                /* Oculta el div */
+            }
+
+           
+    </style>
+
+<nav class="navbar navbar-expand-md ">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="../index.html">
+            <img class="colect" src="img/image(2).png" alt="Logo" style="text-align: center;">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse order-md-3" id="collapsibleNavbar">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="btn btn-primary btn-success" href="../index.html">
+                        <span class="fa fa-arrow-left"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<body>
+
+    <div id="map"></div>
+    <!-- El div con la clase status está oculto -->
+    <div class="status">
+        <p id="statusDevice1">Dispositivo 1: Cargando...</p>
+        <p id="statusDevice2">Dispositivo 2: Cargando...</p>
+    </div>
+
+
+    <!-- Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-analytics.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAxY5B7GLen2oUZWNkOqotsFYj1PeyHgKE",
+            authDomain: "gps3-b4cda.firebaseapp.com",
+            databaseURL: "https://gps3-b4cda-default-rtdb.firebaseio.com",
+            projectId: "gps3-b4cda",
+            storageBucket: "gps3-b4cda.appspot.com",
+            messagingSenderId: "644152882568",
+            appId: "1:644152882568:web:a6e9b78911e6a059c8f63d",
+            measurementId: "G-DSKTR3YGZX"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+
+        let map;
+        let marker1;
+        let marker2;
+        let infoWindow1;
+        let infoWindow2;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 0, lng: 0 },
+                zoom: 13
+            });
+
+            const busIcon = {
+                url: 'img/marcador.png', // Ruta de la imagen del marcador
+                scaledSize: new google.maps.Size(30, 40), // Tamaño de la imagen
+                origin: new google.maps.Point(0, 0), // Origen de la imagen
+                anchor: new google.maps.Point(20, 40) // Punto de anclaje
+            };
+
+            marker1 = new google.maps.Marker({
+                position: { lat: 0, lng: 0 },
+                map: map,
+                visible: false,
+                icon: busIcon,
+                label: '1'
+            });
+
+            marker2 = new google.maps.Marker({
+                position: { lat: 0, lng: 0 },
+                map: map,
+                visible: false,
+                icon: busIcon,
+                label: '2'
+            });
+
+            infoWindow1 = new google.maps.InfoWindow();
+            infoWindow2 = new google.maps.InfoWindow();
+
+            marker1.addListener('click', () => {
+                infoWindow1.open(map, marker1);
+            });
+
+            marker2.addListener('click', () => {
+                infoWindow2.open(map, marker2);
+            });
+
+            // Escuchar cambios en la base de datos para device1
+            const locationRef1 = ref(database, 'device1');
+            onValue(locationRef1, (snapshot) => {
+                const data = snapshot.val();
+                if (data && data.location) {
+                    const location = data.location;
+                    const connected = data.connected;
+                    const name = data.name || 'Dispositivo 1';
+                    marker1.setPosition({ lat: location.lat, lng: location.lng });
+                    marker1.setVisible(connected);
+                    marker1.setLabel('1');
+                    infoWindow1.setContent(`<div>${name}</div>`);
+                    document.getElementById('statusDevice1').textContent = `Dispositivo 1: ${connected ? 'Conectado' : 'Desconectado'}`;
+                    if (connected) {
+                        map.setCenter({ lat: location.lat, lng: location.lng });
+                    }
+                }
+            });
+
+            // Escuchar cambios en la base de datos para device2
+            const locationRef2 = ref(database, 'device2');
+            onValue(locationRef2, (snapshot) => {
+                const data = snapshot.val();
+                if (data && data.location) {
+                    const location = data.location;
+                    const connected = data.connected;
+                    const name = data.name || 'Dispositivo 2';
+                    marker2.setPosition({ lat: location.lat, lng: location.lng });
+                    marker2.setVisible(connected);
+                    marker2.setLabel('2');
+                    infoWindow2.setContent(`<div>${name}</div>`);
+                    document.getElementById('statusDevice2').textContent = `Dispositivo 2: ${connected ? 'Conectado' : 'Desconectado'}`;
+                    if (connected) {
+                        map.setCenter({ lat: location.lat, lng: location.lng });
+                    }
+                }
+            });
+        }
+
+        // Inicializar el mapa cuando la página se carga
+        window.onload = initMap;
+    </script>
+
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJsil_1ciTUTZn9Bt-he6QX5kBthyjWRY"></script>
+</body>
+
+</html>
