@@ -141,7 +141,7 @@ $(function(){
                 const cambiarContrasenaContent = document.getElementById('cambiarContrasenaContent');
 
 
-            // Función para mostrar/ocultar secciones
+                // Función para mostrar/ocultar secciones
                 function showSection(sectionToShow) {
                     // Ocultar todas las secciones con la clase content-section
                     const sections = document.querySelectorAll('.content-section');
