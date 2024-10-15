@@ -20,10 +20,19 @@
         $sql_nombre_escuela->execute();
         $result = $sql_nombre_escuela->get_result();
 
+        //id establecimiento educativo
+        $sql_id_escuela = $conexion->prepare("SELECT id_establecimiento_educativo FROM establecimiento_educativo WHERE CUE = ?");
+        $sql_id_escuela->bind_param("s", $usuario);
+        $sql_id_escuela->execute();
+        $resultado = $sql_id_escuela->get_result();
+        if ($result_id_escuela = $resultado->fetch_assoc()) {
+            $id_escuela = $result_id_escuela['id_establecimiento_educativo'];
+        }
+
         //estudiantes habilitados por escuela
         $sql_datos_habilitados_esc = $conexion->prepare("SELECT * FROM estudiante WHERE estado_credencial = ? AND establecimiento_educativo = ?");
         $estado_hab = "habilitado";
-        $sql_datos_habilitados_esc->bind_param("ss", $estado_hab, $usuario);
+        $sql_datos_habilitados_esc->bind_param("ss", $estado_hab, $id_escuela);
         $sql_datos_habilitados_esc->execute();
         $result_hab_esc = $sql_datos_habilitados_esc->get_result();
         $alumnos_hab_user = $result_hab_esc->num_rows;
@@ -61,6 +70,8 @@
         //alumnos por habilitar
         $sql_datos_no_habilitados = $conexion->prepare("SELECT * FROM estudiante WHERE estado_credencial = ?");
         $estado_no_hab = "espera_cooperativa";
+        //$sql_datos_no_habilitados = $conexion->prepare("SELECT ");
+        //$estado_no_hab = "espera";
         $sql_datos_no_habilitados->bind_param("s", $estado_no_hab);
         $sql_datos_no_habilitados->execute();
         $result_no_hab = $sql_datos_no_habilitados->get_result();

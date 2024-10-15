@@ -13,13 +13,13 @@ function enviarCorreo($from, $name, $address, $subject, $body) {
     try {
         // Configuración del servidor
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com'; 
+        $mail->Host = 'smtp.office365.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'leaguenet7@gmail.com'; 
-        $mail->Password = 'kvns qlot jbvp yivd';  
+        $mail->Username = 'facundoaragon05@hotmail.com';
+        $mail->Password = 'cadufacu7';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
-        
+
         // Activar modo de depuración
         $mail->SMTPDebug = 2; // Nivel de depuración
         $mail->Debugoutput = 'html';

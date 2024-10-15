@@ -43,12 +43,11 @@ if (isset($_POST['id_confirmar'])) {
 
         include("./email.php");
         $response = enviarCorreo(
-            "MiTransportee@gmail.com",
-            "MiTransporte",
+            "facundoaragon05@hotmail.com",
+            "miTransporte",
             $result_sql_email_alumno['email'],
             "Su credencial ha sido habilitada",
             "
-
             <h1 style='text-align: center;'>miTransporte</h1>
             <img src='https://www.tecnica1lacosta.edu.ar/mitransporte/public/img/logo.png' alt='Logo' />
             <h3 style='text-align: center;'>Su credencial ha sido habilitada, ya está apto para poder iniciar sesión y utilizar su credencial</h3>
@@ -60,7 +59,6 @@ if (isset($_POST['id_confirmar'])) {
             <footer style='text-align: center; font-size: 12px; color: #777;'>
                 <p>© 2024 miTransporte. Todos los derechos reservados.</p>
             </footer>
-            
             "
         );
 
