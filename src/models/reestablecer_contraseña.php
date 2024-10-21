@@ -1,14 +1,15 @@
 <?php
 include('../config/db-connection.php');
+header('Content-Type: application/json');
 
 // Obtener datos del POST
 $token = $conexion->real_escape_string($_POST['token']);
 $new_password = $conexion->real_escape_string($_POST['new_password']);
 
-if (strlen($new_password) < 8) {
+/*if (strlen($new_password) < 8) {
     echo json_encode(['success' => false, 'message' => 'La contraseña debe tener al menos 8 caracteres.']);
     exit();
-}
+}*/
 
 // Obtener el DNI asociado al token
 $sql_get_dni = $conexion->prepare("SELECT DNI FROM password_resets WHERE token = ? AND expires_at > NOW()");
@@ -32,6 +33,7 @@ if ($result->num_rows > 0) {
         $sql_delete_token = $conexion->prepare("DELETE FROM password_resets WHERE token = ?");
         $sql_delete_token->bind_param('s', $token);
         $sql_delete_token->execute();
+        
 
         echo json_encode(['success' => true, 'message' => 'Contraseña reestablecida con éxito.']);
     } else {

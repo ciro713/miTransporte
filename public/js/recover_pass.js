@@ -30,21 +30,32 @@ $(function(){
         var confirmPassword = $('#confirm-password').val();
         var token = $('#reset-token').val(); // Obtener el token del campo oculto
     
-        if(newPassword === confirmPassword){
+        if (newPassword === confirmPassword) {
             $.ajax({
-                url: '../src/models/reestablecer_contrasena.php',
+                url: '../src/models/reestablecer_contraseña.php',
                 type: 'POST',
-                data: { 
+                data: {
                     token: token, // Enviar el token
-                    new_password: newPassword 
+                    new_password: newPassword
                 },
-                success: function(response){
-                    response = JSON.parse(response); // Parsear JSON si la respuesta es en JSON
-                    if(response.success){
-                        alert('Tu contraseña ha sido reestablecida.');
-                    } else {
-                        alert('Hubo un error al reestablecer la contraseña: ' + response.message);
+                success: function(response) {
+                    try {
+                        response = JSON.parse(response); // Intentar parsear la respuesta como JSON
+    
+                        if (response.success) {
+                            alert('Tu contraseña ha sido reestablecida.');
+                        } else {
+                            alert('Hubo un error al reestablecer la contraseña: ' + response.message);
+                        }
+                    } catch (e) {
+                        console.error('Error al parsear JSON:', e);
+                        console.log('Respuesta del servidor:', response);
+                        alert('Ocurrió un error inesperado. Revisa la consola para más detalles.');
                     }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error en la solicitud AJAX:', status, error);
+                    alert('Hubo un problema al procesar tu solicitud. Intenta nuevamente.');
                 }
             });
         } else {
