@@ -32,14 +32,23 @@ $(function(){
     
         if (newPassword === confirmPassword) {
             $.ajax({
-                url: '../src/models/reestablecer_contraseña.php',
+                url: '../src/models/reestablecer_pass.php',
                 type: 'POST',
+                dataType : 'json',
                 data: {
                     token: token, // Enviar el token
                     new_password: newPassword
                 },
                 success: function(response) {
-                    try {
+                    console.log('Respuesta del servidor (sin parsear):', response);
+                    if (response.success) {
+                        alert('Tu contraseña ha sido reestablecida.');
+                        window.location.href = '../public/formulario.html';
+                    } else {
+                        alert('Hubo un error al reestablecer la contraseña: ' + response.message);
+                        //agregar mensaje de error
+                    }
+                    /*try {
                         response = JSON.parse(response); // Intentar parsear la respuesta como JSON
     
                         if (response.success) {
@@ -51,12 +60,13 @@ $(function(){
                         console.error('Error al parsear JSON:', e);
                         console.log('Respuesta del servidor:', response);
                         alert('Ocurrió un error inesperado. Revisa la consola para más detalles.');
-                    }
+                    }*/
                 },
                 error: function(xhr, status, error) {
                     console.error('Error en la solicitud AJAX:', status, error);
-                    alert('Hubo un problema al procesar tu solicitud. Intenta nuevamente.');
-                }
+                    console.log('Respuesta del servidor:', xhr.responseText);
+                    alert('Error: ' + xhr.status + ' - ' + xhr.statusText);
+                }                
             });
         } else {
             alert('Las contraseñas no coinciden.');
