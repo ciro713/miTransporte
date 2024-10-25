@@ -75,11 +75,11 @@ if (isset($_POST['id_confirmar'])) {
     }
 
     // Verificar si la operación de actualización fue exitosa
-    if ($stmt_update_relation->affected_rows > 0) {
+    /*if ($stmt_update_relation->affected_rows > 0) {
         echo json_encode(["ok" => true, "message" => "El estado de la cooperativa ha sido actualizado, pero no se ha habilitado la credencial."]);
     } else {
         echo json_encode(["ok" => false, "message" => "No se pudo actualizar el estado de la cooperativa."]);
-    }
+    }*/
 } else {
     echo json_encode(["ok" => false, "message" => "No se recibió ningún ID"]);
 }

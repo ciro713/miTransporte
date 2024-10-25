@@ -21,8 +21,8 @@ function enviarCorreo($from, $name, $address, $subject, $body) {
         $mail->Port = 587;
 
         // Activar modo de depuración
-        $mail->SMTPDebug = 2; // Nivel de depuración
-        $mail->Debugoutput = 'html';
+        /*$mail->SMTPDebug = 2; // Nivel de depuración
+        $mail->Debugoutput = 'html';*/
 
         // Destinatarios
         $mail->setFrom($from, $name);

@@ -3,7 +3,7 @@ $(function(){
         url: '../models/url_qr.php', // Ruta al archivo PHP que devuelve el id_usuario o DNI del usuario
         type: 'GET',
         success: function(res){
-            var id_usuario = res.trim(); // Asegúrate de quitar espacios en blanco
+            var id_usuario = res.trim(); // quita espacios en blanco
 
             // Construir la URL con el id_usuario
             var urlPerfilAlumno = "http://localhost/miTransporte/src/views/perfil.php?id_usuario=" + id_usuario;
