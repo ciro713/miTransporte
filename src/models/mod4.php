@@ -2,6 +2,9 @@
 include('../config/db-connection.php');
 include('../config/sesion.php');
 
+// Configurar encabezado para que siempre devuelva JSON
+//header('Content-Type: application/json');
+
 $id_usuario = $_SESSION['id_usuario'];
 
 // Obtener el ID de la cooperativa del usuario actual
