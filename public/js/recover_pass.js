@@ -72,5 +72,55 @@ $(function(){
             alert('Las contraseñas no coinciden.');
         }
     });
+
+
+    $('#btn-cambiar-password').on('click', function(){
+        var newPassword = $('#password_escuela_cambiar').val();
+        var confirmPassword = $('#password_escuela_cambiar_confirmar').val();
+
+        console.log('pass:', newPassword);
+        console.log('pass confirmada:', confirmPassword);
+
+        if(newPassword === confirmPassword){
+            $.ajax({
+                url: '../src/models/cambiar_pass.php',
+                type: 'POST',
+                dataType : 'json',
+                data: {
+                    new_password: newPassword
+                },
+                success: function(response) {
+                    console.log('Respuesta del servidor (sin parsear):', response);
+                    if (response.success) {
+                        alert('Tu contraseña se cambio correctamente.');
+                    } else {
+                        alert('Hubo un error al cambiar la contraseña: ' + response.message);
+                        //agregar mensaje de error
+                    }
+                    /*try {
+                        response = JSON.parse(response); // Intentar parsear la respuesta como JSON
+    
+                        if (response.success) {
+                            alert('Tu contraseña ha sido reestablecida.');
+                        } else {
+                            alert('Hubo un error al reestablecer la contraseña: ' + response.message);
+                        }
+                    } catch (e) {
+                        console.error('Error al parsear JSON:', e);
+                        console.log('Respuesta del servidor:', response);
+                        alert('Ocurrió un error inesperado. Revisa la consola para más detalles.');
+                    }*/
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error en la solicitud AJAX:', status, error);
+                    console.log('Respuesta del servidor:', xhr.responseText);
+                    alert('Error: ' + xhr.status + ' - ' + xhr.statusText);
+                }                
+            });
+        } else {
+            alert('Las contraseñas no coinciden.');
+        }
+    })
+    
     
 })
