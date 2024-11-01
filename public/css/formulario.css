@@ -1,0 +1,143 @@
+
+.navbar-brand img {
+    width: 45%;
+    height: auto;
+    position: relative;
+}
+    @media (max-width: 768px) {
+    .btn-success {
+        display: none;
+    }
+    .navbar-brand {
+        margin: 0 auto;
+        display: block;
+        text-align: center;
+    }}
+
+/* Estilos para el formulario de inicio de sesión y registro */
+.container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f0f3f5; /* Fondo gris claro */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+h3 {
+    text-align: center;
+    color: #3b5998; 
+}
+
+
+        /* Estilos para la página de login */
+        .password-container-login {
+            position: relative;
+            display: inline-block;
+        }
+
+        .password-container-login input {
+            padding-right: 40px;
+        }
+
+        .password-container-login .toggle-password {
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .password-container-login .toggle-password img {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Estilos para la página de registro */
+        .password-container-registro {
+            position: relative;
+            display: inline-block;
+        }
+
+        .password-container-registro input {
+            padding-right: 40px;
+        }
+
+        .password-container-registro .toggle-password {
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+ 
+        .password-container-registro .toggle-password img {
+            width: 15px;
+            height: 15px;
+        }
+
+        /* Estilos para la página de cambiar contraseña */
+        .password-container-escuela {
+            position: relative;
+            display: inline-block;
+        }
+
+        .password-container-escuela input {
+            padding-right: 40px;
+        }
+
+        .password-container-escuela .toggle-password {
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .password-container-escuela .toggle-password img {
+            width: 15px;
+            height: 15px;
+        }
+      
+
+label {
+    color: #3b5998; 
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ced4da; /* Borde gris */
+    border-radius: 5px;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #3b5998; /* Borde azul de Facebook al enfocar */
+}
+
+
+
+.btn-primary {
+    background-color: #3b5998; /* Azul de Facebook */
+    color: #fff; /* Texto blanco */
+}
+
+.btn-primary:hover {
+    background-color: #2d4373; /* Azul más oscuro al pasar el mouse */
+}
+
+.btn-dark {
+    background-color: #000; /* Negro */
+    color: #fff; /* Texto blanco */
+}
+
+.btn-dark:hover {
+    background-color: #333; /* Gris más oscuro al pasar el mouse */
+}

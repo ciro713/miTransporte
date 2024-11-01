@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administracion</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="icon" href="img/logo.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        .content-section {
+        opacity: 1;
+        transition: opacity 0.5s ease;
+    }
+    
+    .content-section.hide {
+        opacity: 0;
+        display: none;
+    }
+    
+    </style>
+
+</head>
+<body>            
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="profile">
+                <img src="../public/img/usuario.png" alt="Profile" class="profile-img">
+                <h2 class="name"></h2>
+            </div>
+
+            <nav class="nav">
+                <a id="inicioBtn" style="cursor: pointer;">Inicio</a>
+                <a id="alertasBtn" style="display: none;">Alertas</a>
+                <a id="noticiasBtn" style="display: none;">Noticias</a>
+                <a href="escuela_habilitador.html">Estudiantes</a>
+                <a id="cambiarContrasenaBtn" style="cursor: pointer;">Cambiar Contraseña</a>
+                <a class="cerrar_sesion">Cerrar Sesion</a>
+            </nav>
+
+        </div>
+
+        <div class="main-content">
+            <div class="balance-section animate">
+                <div class="balance-circle animate">
+                    <h3>Alertas</h3>
+                    <p>Ultimas Alertas</p>
+                    <p></p><br>
+                </div>
+
+                <div class="balance-circle animate"> 
+                    <h3>Usuarios</h3>
+                    <canvas id="usersChart"></canvas>
+                    <!--<div class="legend">
+                        <span class="deleted"></span> Usuarios Eliminados
+                        <span class="to-confirm"></span> Usuarios a Confirmar
+                        <span class="confirmed"></span> Usuarios Confirmados
+                    </div>-->
+                </div>
+            </div>
+
+            <div class="payment-section animate">
+                <div class="payment-due animate">
+                    <br>
+                    <div class="counters">
+                        <div class="counter">
+                            <h4 id="total-credentials">0</h4>
+                            <p>Total Credenciales</p>
+                        </div>
+                        <div class="counter">
+                            <h4 id="school-credentials">0</h4>
+                            <p>Credenciales Usadas en Escuela
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cambiarContrasenaContent" style="display: none;">
+                <div class="password-container">
+                    <div class="password-box">
+                        <h3>Cambiar Contraseña</h3>
+                        <form>
+                            <div class="form-group">
+                                <label for="password_escuela_cambiar">Nueva Contraseña:</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password_escuela_cambiar">
+                                </div>
+
+                                <label for="password_escuela_cambiar_confirm">Confirmar Contraseña:</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="password_escuela_cambiar_confirmar">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group input-token" style="display: none;">
+                                <label for="token">Código de Verificación:</label>
+                                <input type="text" class="form-control" id="token">
+                            </div>
+                            
+                            <button type="button" class="btn btn-primary" id="btn-cambiar-password">Cambiar Contraseña</button>
+                            <button type="button" class="btn btn-secondary" id="btn-enviar-token" style="display: none;">Enviar Nueva Contraseña</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+    </div>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/datos_admin.js"></script>
+    <script>
+        $(".cerrar_sesion").click(function(){
+        $.ajax({
+            url : '../src/controllers/cerrar_sesion.php',
+            type : 'POST',
+            success: function(res) {
+                console.log("Respuesta del servidor:", res);
+                
+                window.location.href = '../index.html';
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error("Error en la solicitud AJAX:", textStatus, errorThrown);
+            }
+        });
+    }); 
+
+    </script>
+    <script src="js/recover_pass.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Admin</title>
+    <link rel="stylesheet" href="https://argob.github.io/poncho/poncho.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/cuerpo.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/mapa.css">
+    <link rel="icon" href="img/logo.ico" />
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-md ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="admin.html">
+                <img class="colect" src="img/image(2).png" alt="Logo" style="text-align: center;">
+            </a>
+    
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse order-md-3" id="collapsibleNavbar">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="btn btn-primary btn-success" href="admin.html">
+                            <span class="fa fa-arrow-left"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="map"></div>
+    <div class="container">
+        <div class="form-container">
+            <input type="text" id="deviceName1" placeholder="Nombre para Dispositivo 1">
+            <button id="addButton1">Agregar Dispositivo 1</button>
+            <button id="stopButton1">Detener Dispositivo 1</button>
+            <input type="text" id="deviceName2" placeholder="Nombre para Dispositivo 2">
+            <button id="addButton2">Agregar Dispositivo 2</button>
+            <button id="stopButton2">Detener Dispositivo 2</button>
+        </div>
+        <div class="status">
+            <p id="statusDevice1">Dispositivo 1: Desconectado</p>
+            <p id="statusDevice2">Dispositivo 2: Desconectado</p>
+        </div>
+    </div>
+
+    <!-- Firebase -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getDatabase, ref, set, onValue, update } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-analytics.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAxY5B7GLen2oUZWNkOqotsFYj1PeyHgKE",
+            authDomain: "gps3-b4cda.firebaseapp.com",
+            databaseURL: "https://gps3-b4cda-default-rtdb.firebaseio.com",
+            projectId: "gps3-b4cda",
+            storageBucket: "gps3-b4cda.appspot.com",
+            messagingSenderId: "644152882568",
+            appId: "1:644152882568:web:a6e9b78911e6a059c8f63d",
+            measurementId: "G-DSKTR3YGZX"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+
+        let map;
+        let marker1;
+        let marker2;
+        let infoWindow1;
+        let infoWindow2;
+        let intervalId1;
+        let intervalId2;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 0, lng: 0 },
+                zoom: 13
+            });
+
+            marker1 = new google.maps.Marker({
+                position: { lat: 0, lng: 0 },
+                map: map,
+                visible: false,
+                label: 'Dispositivo 1'
+            });
+
+            marker2 = new google.maps.Marker({
+                position: { lat: 0, lng: 0 },
+                map: map,
+                visible: false,
+                label: 'Dispositivo 2'
+            });
+
+            infoWindow1 = new google.maps.InfoWindow();
+            infoWindow2 = new google.maps.InfoWindow();
+
+            marker1.addListener('click', () => {
+                infoWindow1.open(map, marker1);
+            });
+
+            marker2.addListener('click', () => {
+                infoWindow2.open(map, marker2);
+            });
+
+            // Escuchar cambios en la base de datos para device1
+            const locationRef1 = ref(database, 'device1');
+            onValue(locationRef1, (snapshot) => {
+                const data = snapshot.val();
+                if (data && data.location) {
+                    const location = data.location;
+                    const connected = data.connected;
+                    const name = data.name || 'Dispositivo 1';
+                    marker1.setPosition({ lat: location.lat, lng: location.lng });
+                    marker1.setVisible(connected);
+                    marker1.setLabel(name);
+                    infoWindow1.setContent(`<div>${name}</div>`);
+                    document.getElementById('statusDevice1').textContent = `Dispositivo 1: ${connected ? 'Conectado' : 'Desconectado'}`;
+                    if (connected) {
+                        map.setCenter({ lat: location.lat, lng: location.lng });
+                    }
+                }
+            });
+
+            // Escuchar cambios en la base de datos para device2
+            const locationRef2 = ref(database, 'device2');
+            onValue(locationRef2, (snapshot) => {
+                const data = snapshot.val();
+                if (data && data.location) {
+                    const location = data.location;
+                    const connected = data.connected;
+                    const name = data.name || 'Dispositivo 2';
+                    marker2.setPosition({ lat: location.lat, lng: location.lng });
+                    marker2.setVisible(connected);
+                    marker2.setLabel(name);
+                    infoWindow2.setContent(`<div>${name}</div>`);
+                    document.getElementById('statusDevice2').textContent = `Dispositivo 2: ${connected ? 'Conectado' : 'Desconectado'}`;
+                    if (connected) {
+                        map.setCenter({ lat: location.lat, lng: location.lng });
+                    }
+                }
+            });
+        }
+
+        function getUniqueIdentifier() {
+            let userId = sessionStorage.getItem('userId');
+            if (!userId) {
+                userId = 'user_' + Math.random().toString(36).substring(2, 15);
+                sessionStorage.setItem('userId', userId);
+            }
+            return userId;
+        }
+
+        function updateLocation(deviceNumber) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((position) => {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    const name = document.getElementById(`deviceName${deviceNumber}`).value || `Dispositivo ${deviceNumber}`;
+                    const userId = getUniqueIdentifier();
+
+                    // Actualizar la base de datos
+                    const locationRef = ref(database, `device${deviceNumber}`);
+                    set(locationRef, {
+                        location: { lat: lat, lng: lng },
+                        connected: true,
+                        name: name,
+                        userId: userId
+                    });
+                }, (error) => {
+                    console.error("Error al obtener la ubicación: ", error);
+                }, {
+                    enableHighAccuracy: true,
+                    timeout: 5000,
+                    maximumAge: 0
+                });
+            } else {
+                alert("La geolocalización no es compatible con este navegador.");
+            }
+        }
+
+
+        function startUpdatingLocation(deviceNumber) {
+            const updateFunction = () => updateLocation(deviceNumber);
+            const intervalId = setInterval(updateFunction, 3000);
+
+            if (deviceNumber === 1) {
+                intervalId1 = intervalId;
+                marker1.setVisible(true);
+                const name = document.getElementById('deviceName1').value || 'Dispositivo 1';
+                marker1.setLabel(name);
+                infoWindow1.setContent(`<div>${name}</div>`);
+                infoWindow1.open(map, marker1);
+            } else if (deviceNumber === 2) {
+                intervalId2 = intervalId;
+                marker2.setVisible(true);
+                const name = document.getElementById('deviceName2').value || 'Dispositivo 2';
+                marker2.setLabel(name);
+                infoWindow2.setContent(`<div>${name}</div>`);
+                infoWindow2.open(map, marker2);
+            }
+            // Actualizar estado de conexión a true en la base de datos
+            const locationRef = ref(database, `device${deviceNumber}`);
+            update(locationRef, {
+                connected: true
+            });
+        }
+
+        function stopUpdatingLocation(deviceNumber) {
+            if (deviceNumber === 1 && intervalId1) {
+                clearInterval(intervalId1);
+                intervalId1 = null;
+            } else if (deviceNumber === 2 && intervalId2) {
+                clearInterval(intervalId2);
+                intervalId2 = null;
+            }
+
+            // Actualizar estado de conexión a false en la base de datos
+            const locationRef = ref(database, `device${deviceNumber}`);
+            update(locationRef, {
+                connected: false
+            });
+        }
+
+        document.getElementById('addButton1').addEventListener('click', () => startUpdatingLocation(1));
+        document.getElementById('stopButton1').addEventListener('click', () => stopUpdatingLocation(1));
+        document.getElementById('addButton2').addEventListener('click', () => startUpdatingLocation(2));
+        document.getElementById('stopButton2').addEventListener('click', () => stopUpdatingLocation(2));
+
+        // Cargar el mapa cuando el documento esté listo
+        window.onload = initMap;
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCJsil_1ciTUTZn9Bt-he6QX5kBthyjWRY"" async defer></script>
+</body>
+</html>
