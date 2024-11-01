@@ -88,8 +88,8 @@ $(function () {
     $(document).on('click', '.confirmar', function () {
         let row = $(this).closest('tr');
         let DNI = row.find('td:first').text();
-        console.log('DNI a confirmar:', DNI);
-        console.log('Fila a ocultar:', row);
+        /*console.log('DNI a confirmar:', DNI);
+        console.log('Fila a ocultar:', row);*/
         $.ajax({
             url: '../src/controllers/modpasar.php',
             type: 'POST',

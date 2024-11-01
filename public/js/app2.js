@@ -50,7 +50,32 @@ $(function(){
             data: { id_confirmar: DNI },
             success: function(res) {
                 console.log('Respuesta cruda:', res); // Imprime la respuesta tal cual se recibe
-                try {
+                if (res.habilitado) {
+                    // Reemplaza alert por SweetAlert
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 3000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: "success",
+                        title: "El estado de la credencial ha sido actualizado a 'habilitado'"
+                    });
+                    cargar();
+                } else {
+                    Toast.fire({
+                        icon: "error",
+                        title: datos.message || 'Hubo un error al actualizar el estado de la credencial'
+                    });
+                    console.log("respuesta: ", datos);
+                }
+                /*try {
                     let datos = JSON.parse(res);   
                     console.log('JSON parseado:', datos); // Imprime el JSON parseado
                     if (datos.habilitado) {
@@ -86,7 +111,7 @@ $(function(){
                         title: "Error",
                         text: "Ocurrió un error al procesar la respuesta del servidor."
                     });
-                }
+                }*/
             }
         });
     });
